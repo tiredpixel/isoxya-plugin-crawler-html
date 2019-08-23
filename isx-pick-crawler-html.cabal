@@ -42,8 +42,10 @@ library pvk-com
 
 library isx-pick-crawler-html-int
     exposed-modules:
+        ISX.Pick.CrawlerHTML.Parser
         ISX.Pick.CrawlerHTML.Route
         ISX.Pick.CrawlerHTML.Zone.Common.Apex
+        ISX.Pick.CrawlerHTML.Zone.Common.Data
     other-modules:
         ISX.Pick.CrawlerHTML.Resource.Common
         Prelude
@@ -58,6 +60,7 @@ library isx-pick-crawler-html-int
         containers,
         HandsomeSoup,
         hxt,
+        network-uri,
         snap-core,
         snap-extras,
         text,
@@ -123,7 +126,10 @@ test-suite isx-pick-crawler-html-test
     type:               exitcode-stdio-1.0
     main-is:            Spec.hs
     other-modules:
+        ISX.Factory
+        ISX.Pick.CrawlerHTML.ParserSpec
         ISX.Pick.CrawlerHTML.Zone.Common.ApexSpec
+        ISX.Pick.CrawlerHTML.Zone.Common.DataSpec
         ISX.Test
         Prelude
     build-depends:
