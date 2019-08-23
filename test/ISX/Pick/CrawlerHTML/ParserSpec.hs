@@ -25,6 +25,9 @@ spec = do
         it "nofollow x-robots-tag noindex,nofollow" $
             testPage "example.com/_x_robots_tag" 200 $ M.fromList [
                 ("X-Robots-Tag", "noindex, nofollow")]
+        
+        it "nofollow meta-robots noindex,nofollow" $
+            testPage "example.com/_meta_robots" 200 M.empty
     
     describe "www.pavouk.tech" $ do
         it "apex" $
