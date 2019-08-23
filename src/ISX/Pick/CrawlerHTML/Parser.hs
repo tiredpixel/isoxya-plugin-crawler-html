@@ -5,6 +5,7 @@ import              Text.HandsomeSoup
 import              Text.XML.HXT.Core
 import qualified    Data.Map                                as  M
 import qualified    Data.Set                                as  S
+import qualified    Data.Text                               as  T
 import qualified    Network.URI                             as  URI
 import qualified    PVK.Com.API.Ext.URI                     as  URI
 import qualified    PVK.Com.API.Resource.ISXPick            as  R
@@ -18,17 +19,26 @@ parse rock = S.fromList $ normalizeLinks m links
         b = R.rockBody rock
         body = fromRight "" $ decodeUtf8' b
         doc p = runLA (hread >>> p) $ toString body
-        locations = maybeToList $ extractLocation m h
         pageLinks = doc $ css "a" ! "href"
-        links = locations ++ (toText <$> pageLinks)
+        links
+            | isHeaderRedirect m = maybeToList $ M.lookup "Location" h
+            | isHeaderNoFollow h = []
+            | otherwise = toText <$> pageLinks
 
+isHeaderNoFollow :: R.RockHeader -> Bool
+isHeaderNoFollow h = "nofollow" `S.member` robots
+    where
+        robots = case M.lookup "X-Robots-Tag" h of
+            Just v  -> S.fromList $ T.strip <$> splitTag v
+            Nothing -> S.empty
+        splitTag t = case T.breakOnEnd ":" t of
+            ("", v) -> T.splitOn "," v
+            _ -> []
 
-extractLocation :: R.RockMeta -> R.RockHeader -> Maybe Text
-extractLocation m h = do
-    s <- R.rockMetaStatusCode m
-    if s `elem` statusCodeRedirects
-        then M.lookup "Location" h
-        else Nothing
+isHeaderRedirect :: R.RockMeta -> Bool
+isHeaderRedirect m = case R.rockMetaStatusCode m of
+    Just s  -> s `S.member` statusCodeRedirects
+    Nothing -> False
 
 normalizeLinks :: R.RockMeta -> [Text] -> [R.OreUrl]
 normalizeLinks m es =
@@ -37,5 +47,5 @@ normalizeLinks m es =
     where
         baseUrl = URI.unURIAbsolute $ R.rockMetaUrl m
 
-statusCodeRedirects :: [Text]
-statusCodeRedirects = ["301", "302", "303", "307", "308"]
+statusCodeRedirects :: S.Set Text
+statusCodeRedirects = S.fromList ["301", "302", "303", "307", "308"]

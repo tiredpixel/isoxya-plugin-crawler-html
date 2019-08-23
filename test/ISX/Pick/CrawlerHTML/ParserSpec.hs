@@ -10,9 +10,21 @@ import qualified    PVK.Com.API.Resource.ISXPick            as  R
 
 spec :: Spec
 spec = do
-    describe "example.com" $
+    describe "example.com" $ do
         it "apex" $
             testPage "example.com/" 200 M.empty
+        
+        it "follow x-robots-tag ua:noindex,nofollow" $
+            testPage "example.com/" 200 $ M.fromList [
+                ("X-Robots-Tag", "otherbot: noindex, nofollow")]
+        
+        it "nofollow x-robots-tag nofollow" $
+            testPage "example.com/_x_robots_tag" 200 $ M.fromList [
+                ("X-Robots-Tag", "nofollow")]
+        
+        it "nofollow x-robots-tag noindex,nofollow" $
+            testPage "example.com/_x_robots_tag" 200 $ M.fromList [
+                ("X-Robots-Tag", "noindex, nofollow")]
     
     describe "www.pavouk.tech" $ do
         it "apex" $
