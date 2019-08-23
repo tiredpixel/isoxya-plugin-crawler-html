@@ -1,0 +1,18 @@
+version: "2.4"
+services:
+  pick_crawler_html:
+    env_file: .env
+    build: .
+    volumes:
+      - ./isx-pick-crawler-html.cabal:/home/x/src/isx-pick-crawler-html.cabal
+      - ./lib:/home/x/src/lib
+      - ./src:/home/x/src/src
+      - ./test:/home/x/src/test
+    networks:
+      pick:
+        aliases:
+          - crawler-html.pick.proc.isoxya.pavouk.tech
+networks:
+  pick:
+    external: true
+    name: isx_pick
