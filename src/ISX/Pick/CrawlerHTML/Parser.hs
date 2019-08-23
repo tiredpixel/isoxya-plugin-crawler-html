@@ -3,6 +3,7 @@ module ISX.Pick.CrawlerHTML.Parser (parse) where
 
 import              Text.HandsomeSoup
 import              Text.XML.HXT.Core
+import qualified    Data.Map                                as  M
 import qualified    Data.Set                                as  S
 import qualified    Network.URI                             as  URI
 import qualified    PVK.Com.API.Ext.URI                     as  URI
@@ -10,13 +11,24 @@ import qualified    PVK.Com.API.Resource.ISXPick            as  R
 
 
 parse :: R.Rock -> S.Set R.OreUrl
-parse rock = S.fromList $ normalizeLinks (R.rockMeta rock) links
+parse rock = S.fromList $ normalizeLinks m links
     where
-        body = fromRight "" $ decodeUtf8' $ R.rockBody rock
+        m = R.rockMeta rock
+        h = R.rockHeader rock
+        b = R.rockBody rock
+        body = fromRight "" $ decodeUtf8' b
         doc p = runLA (hread >>> p) $ toString body
+        locations = maybeToList $ extractLocation m h
         pageLinks = doc $ css "a" ! "href"
-        links = toText <$> pageLinks
+        links = locations ++ (toText <$> pageLinks)
 
+
+extractLocation :: R.RockMeta -> R.RockHeader -> Maybe Text
+extractLocation m h = do
+    s <- R.rockMetaStatusCode m
+    if s `elem` statusCodeRedirects
+        then M.lookup "Location" h
+        else Nothing
 
 normalizeLinks :: R.RockMeta -> [Text] -> [R.OreUrl]
 normalizeLinks m es =
@@ -24,3 +36,6 @@ normalizeLinks m es =
         mapMaybe (URI.parseURIReference . toString) es
     where
         baseUrl = URI.unURIAbsolute $ R.rockMetaUrl m
+
+statusCodeRedirects :: [Text]
+statusCodeRedirects = ["301", "302", "303", "307", "308"]

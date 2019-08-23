@@ -4,31 +4,62 @@ module ISX.Pick.CrawlerHTML.ParserSpec (spec) where
 import              ISX.Pick.CrawlerHTML.Parser
 import              ISX.Test
 import              Prelude                                 hiding  (get)
+import qualified    Data.Map.Strict                         as  M
+import qualified    PVK.Com.API.Resource.ISXPick            as  R
 
 
 spec :: Spec
 spec = do
     describe "example.com" $
         it "apex" $
-            testPage "example.com/"
+            testPage "example.com/" 200 M.empty
     
     describe "www.pavouk.tech" $ do
         it "apex" $
-            testPage "www.pavouk.tech/"
+            testPage "www.pavouk.tech/" 200 M.empty
         
         it "robots" $
-            testPage "www.pavouk.tech/robots.txt"
+            testPage "www.pavouk.tech/robots.txt" 200 M.empty
         
         it "image" $
-            testPage "www.pavouk.tech/wp-content/themes/pv-www-theme-2.1.1/assets/images/logo/pv-center.svg.inv.svg.png"
+            testPage "www.pavouk.tech/wp-content/themes/pv-www-theme-2.1.1/assets/images/logo/pv-center.svg.inv.svg.png" 200 M.empty
     
     describe "www.tiredpixel.com" $
         it "apex" $
-            testPage "www.tiredpixel.com/"
+            testPage "www.tiredpixel.com/" 200 M.empty
+    
+    describe "xkcd.com" $ do
+        it "no-redirect 200" $
+            testPage "xkcd.com/_empty" 200 $ M.fromList [
+                ("Location", "https://xkcd.com/")]
+        
+        it "no-redirect 404" $
+            testPage "xkcd.com/_empty" 404 $ M.fromList [
+                ("Location", "https://xkcd.com/")]
+        
+        it "redirect 301" $
+            testPage "xkcd.com/" 301 $ M.fromList [
+                ("Location", "https://xkcd.com/")]
+        
+        it "redirect 302" $
+            testPage "xkcd.com/" 302 $ M.fromList [
+                ("Location", "https://xkcd.com/")]
+        
+        it "redirect 303" $
+            testPage "xkcd.com/" 303 $ M.fromList [
+                ("Location", "https://xkcd.com/")]
+        
+        it "redirect 307" $
+            testPage "xkcd.com/" 307 $ M.fromList [
+                ("Location", "https://xkcd.com/")]
+        
+        it "redirect 308" $
+            testPage "xkcd.com/" 308 $ M.fromList [
+                ("Location", "https://xkcd.com/")]
 
 
-testPage :: Text -> IO ()
-testPage url = do
-    rock <- fRock url
+testPage :: Text -> Integer -> R.RockHeader -> IO ()
+testPage url status header = do
+    rock <- fRock url status header
     let links = parse rock
     assertLinksLookup (toJSON links) url

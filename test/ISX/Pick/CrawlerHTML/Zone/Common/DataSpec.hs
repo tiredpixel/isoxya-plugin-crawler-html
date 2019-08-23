@@ -3,6 +3,7 @@ module ISX.Pick.CrawlerHTML.Zone.Common.DataSpec (spec) where
 
 import              ISX.Test
 import              Prelude                                 hiding  (get)
+import qualified    Data.Map.Strict                         as  M
 
 
 {-# ANN module ("HLint: ignore Reduce duplication" :: String) #-}
@@ -33,7 +34,7 @@ pC = object [
 
 testPage :: Text -> IO ()
 testPage url = do
-    rock <- fRock url
+    rock <- fRock url 200 M.empty
     res <- withSrv $ postJSON "/data" rock
     assertSuccess res
     b <- getResponseBody res
