@@ -19,13 +19,14 @@ parse rock = S.fromList $ normalizeLinks m links
         b = R.rockBody rock
         body = fromRight "" $ decodeUtf8' b
         doc p = runLA (hread >>> p) $ toString body
-        pageLinks = doc $ css "a" ! "href"
+        pageLinks = doc $ css "a" >>> neg (css "a[rel~=\"nofollow\"]") ! "href"
         metaRobots = doc $ css "meta[name=\"robots\"]" ! "content"
         links
             | isHeaderRedirect m = maybeToList $ M.lookup "Location" h
             | isHeaderNoFollow h = []
             | isMetaNoFollow (toText <$> metaRobots) = []
             | otherwise = toText <$> pageLinks
+
 
 isHeaderNoFollow :: R.RockHeader -> Bool
 isHeaderNoFollow h = "nofollow" `S.member` robots

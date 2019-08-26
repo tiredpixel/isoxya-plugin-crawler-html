@@ -28,6 +28,9 @@ spec = do
         
         it "nofollow meta-robots noindex,nofollow" $
             testPage "example.com/_meta_robots" 200 M.empty
+        
+        it "nofollow rel nofollow" $
+            testPage "example.com/_rel_nofollow" 200 M.empty
     
     describe "www.pavouk.tech" $ do
         it "apex" $
