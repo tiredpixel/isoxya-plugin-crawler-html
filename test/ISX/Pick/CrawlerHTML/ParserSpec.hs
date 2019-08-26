@@ -31,6 +31,9 @@ spec = do
         
         it "nofollow rel nofollow" $
             testPage "example.com/_rel_nofollow" 200 M.empty
+        
+        it "base" $
+            testPage "example.com/_base" 200 M.empty
     
     describe "www.pavouk.tech" $ do
         it "apex" $

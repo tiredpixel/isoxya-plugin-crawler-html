@@ -12,13 +12,15 @@ import qualified    PVK.Com.API.Resource.ISXPick            as  R
 
 
 parse :: R.Rock -> S.Set R.OreUrl
-parse rock = S.fromList $ normalizeLinks m links
+parse rock = S.fromList $ normalizeLinks m base links
     where
         m = R.rockMeta rock
         h = R.rockHeader rock
         b = R.rockBody rock
         body = fromRight "" $ decodeUtf8' b
         doc p = runLA (hread >>> p) $ toString body
+        base = URI.URIAbsolute <$> (URI.parseAbsoluteURI =<< listToMaybe (
+            doc $ css "base" ! "href"))
         pageLinks = doc $ css "a" >>> neg (css "a[rel~=\"nofollow\"]") ! "href"
         metaRobots = doc $ css "meta[name=\"robots\"]" ! "content"
         links
@@ -50,12 +52,12 @@ isMetaNoFollow metaRobots = "nofollow" `S.member` robots
             Just v  -> S.fromList $ T.strip <$> T.splitOn "," v
             Nothing -> S.empty
 
-normalizeLinks :: R.RockMeta -> [Text] -> [R.OreUrl]
-normalizeLinks m es =
+normalizeLinks :: R.RockMeta -> Maybe URI.URIAbsolute -> [Text] -> [R.OreUrl]
+normalizeLinks m base es =
     URI.URIReference . flip URI.relativeTo baseUrl <$>
         mapMaybe (URI.parseURIReference . toString) es
     where
-        baseUrl = URI.unURIAbsolute $ R.rockMetaUrl m
+        baseUrl = URI.unURIAbsolute $ fromMaybe (R.rockMetaUrl m) base
 
 statusCodeRedirects :: S.Set Text
 statusCodeRedirects = S.fromList ["301", "302", "303", "307", "308"]
