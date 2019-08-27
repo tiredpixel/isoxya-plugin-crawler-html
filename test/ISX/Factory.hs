@@ -21,7 +21,7 @@ fRock url status header = do
         Just metaUrl = parseUrl url
         meta = R.RockMeta {
             R.rockMetaUrl        = metaUrl,
-            R.rockMetaStatusCode = Just $ show status,
+            R.rockMetaStatusCode = Just status,
             R.rockMetaConfig     = Nothing}
 
 fxExt :: Text -> Text

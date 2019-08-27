@@ -59,5 +59,5 @@ normalizeLinks m base es =
     where
         baseUrl = URI.unURIAbsolute $ fromMaybe (R.rockMetaUrl m) base
 
-statusCodeRedirects :: S.Set Text
-statusCodeRedirects = S.fromList ["301", "302", "303", "307", "308"]
+statusCodeRedirects :: S.Set Integer
+statusCodeRedirects = S.fromList [301, 302, 303, 307, 308]
