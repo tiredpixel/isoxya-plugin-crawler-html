@@ -15,9 +15,11 @@ import qualified    PVK.Com.API.Resource.ISXPick            as  R
 
 create :: Snap ()
 create = do
-    req_      <- Req.getJSON' >>= Req.validateJSON
+    req_      <- Req.getBoundedJSON' s >>= Req.validateJSON
     Just rock <- Res.runValidate req_
     let links = parse rock
     writeJSON $ R.Ore {
         R.oreData = Null,
         R.oreUrls = links}
+    where
+        s = 50000000 -- 50 MB
