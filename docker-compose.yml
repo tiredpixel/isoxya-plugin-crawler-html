@@ -4,6 +4,7 @@ services:
     env_file: .env
     build: .
     volumes:
+      - ./dist:/home/x/src/dist
       - ./isx-pick-crawler-html.cabal:/home/x/src/isx-pick-crawler-html.cabal
       - ./lib:/home/x/src/lib
       - ./src:/home/x/src/src
