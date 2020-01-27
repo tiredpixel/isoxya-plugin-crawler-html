@@ -17,6 +17,17 @@ spec =
             b ^.. key "urls" . values `shouldBe` []
             assertElemN res 2
         
+        it "ok status-code" $ do
+            let pC' = mergeObject pC $ object [
+                    ("meta", object [
+                        ("status_code", Number 418)])]
+            res <- withSrv $ postJSON "/data" pC'
+            assertSuccess res
+            b <- getResponseBody res
+            b ^? key "data" . key "status_code" . _Integer `shouldBe` Just 418
+            b ^.. key "urls" . values `shouldBe` []
+            assertElemN res 2
+        
         describe "www.pavouk.tech" $
             it "apex" $
                 testPage "www.pavouk.tech/"

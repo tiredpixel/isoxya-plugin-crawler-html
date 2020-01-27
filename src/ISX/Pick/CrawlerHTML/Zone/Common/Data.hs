@@ -9,6 +9,7 @@ import              PVK.Com.API.Resource.ISXPickSnap        ()
 import              Snap.Core
 import              Snap.Extras.JSON
 import              System.Environment                      (lookupEnv)
+import qualified    ISX.Pick.CrawlerHTML.Resource.Common    as  R
 import qualified    PVK.Com.API.Req                         as  Req
 import qualified    PVK.Com.API.Res                         as  Res
 import qualified    PVK.Com.API.Resource.ISXPick            as  R
@@ -22,7 +23,8 @@ create = do
     Just rock <- Res.runValidate req_
     let links = parse rock
     writeJSON R.Ore {
-        R.oreData = Null,
+        R.oreData = toJSON R.DataStatus {
+            R.dataStatusCode = R.rockMetaStatusCode $ R.rockMeta rock},
         R.oreUrls = links}
 
 
