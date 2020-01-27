@@ -98,7 +98,7 @@ library pvk-com-test
         lens-aeson,
         snap-core
     mixins:
-        relude                          (Relude as Prelude, Relude.Unsafe)
+        relude                          (Relude.Unsafe)
     hs-source-dirs:
         lib/pvk-com/test
 
