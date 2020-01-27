@@ -13,7 +13,7 @@ import qualified    PVK.Com.API.Resource.ISXPick            as  R
 fRock :: Text -> Integer -> R.RockHeader -> IO R.Rock
 fRock url status header = do
     body <- readFileBS $ fixturePage url
-    return $ R.Rock {
+    return R.Rock {
         R.rockMeta   = meta,
         R.rockHeader = header,
         R.rockBody   = body}

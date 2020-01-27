@@ -8,6 +8,7 @@ import              ISX.Pick.CrawlerHTML.Parser
 import              PVK.Com.API.Resource.ISXPickSnap        ()
 import              Snap.Core
 import              Snap.Extras.JSON
+import              System.Environment                      (lookupEnv)
 import qualified    PVK.Com.API.Req                         as  Req
 import qualified    PVK.Com.API.Res                         as  Res
 import qualified    PVK.Com.API.Resource.ISXPick            as  R
@@ -15,11 +16,15 @@ import qualified    PVK.Com.API.Resource.ISXPick            as  R
 
 create :: Snap ()
 create = do
-    req_      <- Req.getBoundedJSON' s >>= Req.validateJSON
+    reqLim_ <- liftIO $ join <$> (fmap . fmap) readMaybe (lookupEnv "REQ_LIM")
+    let reqLim = fromMaybe reqLimDef reqLim_
+    req_      <- Req.getBoundedJSON' reqLim >>= Req.validateJSON
     Just rock <- Res.runValidate req_
     let links = parse rock
-    writeJSON $ R.Ore {
+    writeJSON R.Ore {
         R.oreData = Null,
         R.oreUrls = links}
-    where
-        s = 50000000 -- 50 MB
+
+
+reqLimDef :: Int64
+reqLimDef = 2097152 -- 2 MB = (1 + .5) * (4/3) MB
