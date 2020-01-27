@@ -121,6 +121,7 @@ test-suite isx-pick-crawler-html-test
         hspec                           ==  2.*,
         network-uri,
         text,
+        unordered-containers,
         vector
     hs-source-dirs:
         test

@@ -23,7 +23,8 @@ create = do
     Just rock <- Res.runValidate req_
     let links = parse rock
     writeJSON R.Ore {
-        R.oreData = toJSON R.DataStatus {
+        R.oreData = toJSON R.Data {
+            R.dataHeader     = R.rockHeader rock,
             R.dataStatusCode = R.rockMetaStatusCode $ R.rockMeta rock},
         R.oreUrls = links}
 

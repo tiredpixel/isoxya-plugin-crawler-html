@@ -1,11 +1,12 @@
 module ISX.Pick.CrawlerHTML.Resource.Common (
     Apex(..),
-    DataStatus(..)
+    Data(..)
     ) where
 
 
 import              Data.Aeson
 import              Data.Time.Clock                         (UTCTime)
+import              PVK.Com.API.Resource.ISXPick
 
 
 data Apex = Apex {
@@ -17,9 +18,11 @@ instance ToJSON Apex where
         "t_now"   .= apexTNow o,
         "version" .= apexVersion o]
 
-newtype DataStatus = DataStatus {
+data Data = Data {
+    dataHeader     :: RockHeader,
     dataStatusCode :: Maybe Integer
     } deriving (Show)
-instance ToJSON DataStatus where
+instance ToJSON Data where
     toJSON o = object [
+        "header"      .= dataHeader o,
         "status_code" .= dataStatusCode o]
