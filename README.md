@@ -1,8 +1,8 @@
-# Isoxya Pickax Crawler HTML (Haskell)
+# Isoxya plugin: Crawler HTML (Haskell)
 
-[Isoxya Pickax Crawler HTML](https://github.com/pavouk-0/isoxya-pickax-crawler-html-hs) is an Isoxya Pickax providing HTML page crawling to SEO and other internet-related data-processing activities. Using this in combination with the proprietary Isoxya engine, it's possible to crawl entire websites efficiently, even if they have millions of pages, and process them in myriad ways, depending on which plugins it's combined with. [Docker images](https://hub.docker.com/r/pavouk0/isoxya-pickax-crawler-html) are available.
+[Isoxya plugin: Crawler HTML](https://github.com/pavouk-0/isoxya-plugin-crawler-html-hs) is an Isoxya plugin providing HTML page crawling to SEO and other internet-related data-processing activities. Using this in combination with the proprietary Isoxya engine, it's possible to crawl entire websites efficiently, even if they have millions of pages, and process them in myriad ways, depending on which plugins it's combined with.
 
-[Isoxya](https://www.pavouk.tech/category/isoxya/) is a High-Performance Internet Data Processor and Web Crawler. It is designed as a next-generation web crawler, scalable for large sites (millions of pages), cost-effective for tiny sites (1+ pages), offering flexible data processing using multi-industry plugins, delivering results via data streaming to multiple storage backends. It is magicked via a REST API using JSON, and is available now for private preview.
+[Isoxya](https://www.pavouk.tech/isoxya/) is a web crawler & data processing system. It is designed as a next-generation web crawler, scalable for large sites (millions of pages), cost-effective for tiny sites (1+ pages), offering flexible data processing using multi-industry plugins, delivering results via data streaming to multiple storage backends. It is magicked via a REST API using JSON.
 
 
 ## Features
