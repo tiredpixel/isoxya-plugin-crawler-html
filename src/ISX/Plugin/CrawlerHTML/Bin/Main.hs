@@ -1,7 +1,7 @@
 module Main (main) where
 
 
-import              ISX.Pick.CrawlerHTML.Route
+import              ISX.Plugin.CrawlerHTML.Route
 import qualified    PVK.Com.API.Zone.Common.Error           as  ZE
 import qualified    Snap.Http.Server                        as  Srv
 

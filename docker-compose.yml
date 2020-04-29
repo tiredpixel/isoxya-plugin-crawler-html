@@ -1,11 +1,11 @@
 version: "2.4"
 services:
-  pick_crawler_html:
+  plugin_crawler_html:
     env_file: .env
     build: .
     volumes:
       - ./dist:/home/x/src/dist
-      - ./isx-pick-crawler-html.cabal:/home/x/src/isx-pick-crawler-html.cabal
+      - ./isx-plugin-crawler-html.cabal:/home/x/src/isx-plugin-crawler-html.cabal
       - ./lib:/home/x/src/lib
       - ./src:/home/x/src/src
       - ./test:/home/x/src/test

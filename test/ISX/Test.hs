@@ -9,7 +9,7 @@ module ISX.Test (
 
 import              Data.Vector                             (Vector)
 import              ISX.Factory
-import              ISX.Pick.CrawlerHTML.Route
+import              ISX.Plugin.CrawlerHTML.Route
 import              PVK.Com.API.Test
 
 

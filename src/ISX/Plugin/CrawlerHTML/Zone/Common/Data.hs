@@ -1,15 +1,15 @@
-module ISX.Pick.CrawlerHTML.Zone.Common.Data (
+module ISX.Plugin.CrawlerHTML.Zone.Common.Data (
     create
     ) where
 
 
 import              Data.Aeson
-import              ISX.Pick.CrawlerHTML.Parser
+import              ISX.Plugin.CrawlerHTML.Parser
 import              PVK.Com.API.Resource.ISXPickSnap        ()
 import              Snap.Core
 import              Snap.Extras.JSON
 import              System.Environment                      (lookupEnv)
-import qualified    ISX.Pick.CrawlerHTML.Resource.Common    as  R
+import qualified    ISX.Plugin.CrawlerHTML.Resource.Common  as  R
 import qualified    PVK.Com.API.Req                         as  Req
 import qualified    PVK.Com.API.Res                         as  Res
 import qualified    PVK.Com.API.Resource.ISXPick            as  R

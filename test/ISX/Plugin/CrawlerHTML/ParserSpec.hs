@@ -1,7 +1,7 @@
-module ISX.Pick.CrawlerHTML.ParserSpec (spec) where
+module ISX.Plugin.CrawlerHTML.ParserSpec (spec) where
 
 
-import              ISX.Pick.CrawlerHTML.Parser
+import              ISX.Plugin.CrawlerHTML.Parser
 import              ISX.Test
 import              Prelude                                 hiding  (get)
 import qualified    Data.Map.Strict                         as  M

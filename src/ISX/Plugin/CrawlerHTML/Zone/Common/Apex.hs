@@ -1,4 +1,4 @@
-module ISX.Pick.CrawlerHTML.Zone.Common.Apex (
+module ISX.Plugin.CrawlerHTML.Zone.Common.Apex (
     apex
     ) where
 
@@ -7,7 +7,7 @@ import              Snap.Core
 import              Snap.Extras.JSON
 import qualified    Data.Text                               as  T
 import qualified    Data.Time.Clock                         as  Clock
-import qualified    ISX.Pick.CrawlerHTML.Resource.Common    as  R
+import qualified    ISX.Plugin.CrawlerHTML.Resource.Common  as  R
 
 
 apex :: Snap ()

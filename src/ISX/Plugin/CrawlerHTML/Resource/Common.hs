@@ -1,4 +1,4 @@
-module ISX.Pick.CrawlerHTML.Resource.Common (
+module ISX.Plugin.CrawlerHTML.Resource.Common (
     Apex(..),
     Data(..)
     ) where

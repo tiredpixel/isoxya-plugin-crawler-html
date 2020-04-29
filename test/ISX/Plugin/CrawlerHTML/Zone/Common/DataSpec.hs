@@ -1,4 +1,4 @@
-module ISX.Pick.CrawlerHTML.Zone.Common.DataSpec (spec) where
+module ISX.Plugin.CrawlerHTML.Zone.Common.DataSpec (spec) where
 
 
 import              ISX.Test

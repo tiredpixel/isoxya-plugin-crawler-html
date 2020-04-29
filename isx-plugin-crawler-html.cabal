@@ -1,7 +1,7 @@
-cabal-version:          2.4
-name:                   isx-pick-crawler-html
+cabal-version:          3.0
+name:                   isx-plugin-crawler-html
 version:                1.1
-synopsis:               Isoxya Pickax Crawler HTML
+synopsis:               Isoxya plugin: Crawler HTML
 license:                BSD-3-Clause
 license-file:           LICENSE
 author:                 Pavouk OÜ
@@ -11,7 +11,7 @@ extra-source-files:     README.md
 --------------------------------------------------------------------------------
 common shared-properties
     build-depends:
-        base-noprelude                  ==  4.12.*,
+        base-noprelude                  ==  4.13.*,
         relude
     mixins:
         relude                          (Relude as Prelude)
@@ -43,15 +43,15 @@ library common
     hs-source-dirs:
         lib/common/src
 
-library isx-pick-crawler-html-int
+library isx-plugin-crawler-html-int
     import:             shared-properties
     exposed-modules:
-        ISX.Pick.CrawlerHTML.Parser
-        ISX.Pick.CrawlerHTML.Route
-        ISX.Pick.CrawlerHTML.Zone.Common.Apex
-        ISX.Pick.CrawlerHTML.Zone.Common.Data
+        ISX.Plugin.CrawlerHTML.Parser
+        ISX.Plugin.CrawlerHTML.Route
+        ISX.Plugin.CrawlerHTML.Zone.Common.Apex
+        ISX.Plugin.CrawlerHTML.Zone.Common.Data
     other-modules:
-        ISX.Pick.CrawlerHTML.Resource.Common
+        ISX.Plugin.CrawlerHTML.Resource.Common
     build-depends:
         common,
         --
@@ -67,16 +67,16 @@ library isx-pick-crawler-html-int
     hs-source-dirs:
         src
 --------------------------------------------------------------------------------
-executable isx-pick-crawler-html
+executable isx-plugin-crawler-html
     import:             shared-properties
     main-is:            Main.hs
     build-depends:
         common,
-        isx-pick-crawler-html-int,
+        isx-plugin-crawler-html-int,
         --
         snap-server
     hs-source-dirs:
-        src/ISX/Pick/CrawlerHTML/Bin
+        src/ISX/Plugin/CrawlerHTML/Bin
     ghc-options:
         -threaded
 --------------------------------------------------------------------------------
@@ -102,20 +102,20 @@ library common-test
     hs-source-dirs:
         lib/common/test
 
-test-suite isx-pick-crawler-html-test
+test-suite isx-plugin-crawler-html-test
     import:             shared-properties
     type:               exitcode-stdio-1.0
     main-is:            Spec.hs
     other-modules:
         ISX.Factory
-        ISX.Pick.CrawlerHTML.ParserSpec
-        ISX.Pick.CrawlerHTML.Zone.Common.ApexSpec
-        ISX.Pick.CrawlerHTML.Zone.Common.DataSpec
+        ISX.Plugin.CrawlerHTML.ParserSpec
+        ISX.Plugin.CrawlerHTML.Zone.Common.ApexSpec
+        ISX.Plugin.CrawlerHTML.Zone.Common.DataSpec
         ISX.Test
     build-depends:
         common,
         common-test,
-        isx-pick-crawler-html-int,
+        isx-plugin-crawler-html-int,
         --
         containers,
         hspec                           ==  2.*,

@@ -1,4 +1,4 @@
-module ISX.Pick.CrawlerHTML.Parser (parse) where
+module ISX.Plugin.CrawlerHTML.Parser (parse) where
 
 
 import              Text.HandsomeSoup
