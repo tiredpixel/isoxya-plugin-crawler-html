@@ -5,7 +5,7 @@ synopsis:               Isoxya plugin: Crawler HTML
 license:                NONE
 license-file:           LICENSE
 author:                 tiredpixel
-maintainer:             en@isoxya.com
+maintainer:             tp@tiredpixel.com
 build-type:             Simple
 extra-source-files:     README.md
 --------------------------------------------------------------------------------
