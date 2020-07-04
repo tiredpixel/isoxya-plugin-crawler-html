@@ -1,7 +1,12 @@
 version: "2.4"
 services:
-  plugin_crawler_html:
+  plugin:
     image: registry.packages.tiredpixel.com/base/isoxya-plugin-crawler-html-build:head
+    volumes:
+      - ./isx-plugin-crawler-html.cabal:/home/x/repo/isx-plugin-crawler-html.cabal
+      - ./lib:/home/x/repo/lib
+      - ./src:/home/x/repo/src
+      - ./test:/home/x/repo/test
     networks:
       plugin:
         aliases:
