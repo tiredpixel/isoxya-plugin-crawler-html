@@ -2,7 +2,7 @@ module Main (main) where
 
 
 import              ISX.Plugin.CrawlerHTML.Route
-import qualified    PVK.Com.API.Res                         as  Res
+import qualified    TPX.Com.API.Res                         as  Res
 import qualified    Snap.Http.Server                        as  Srv
 
 

@@ -7,8 +7,8 @@ import qualified    Data.Map                                as  M
 import qualified    Data.Set                                as  S
 import qualified    Data.Text                               as  T
 import qualified    Network.URI                             as  URI
-import qualified    PVK.Com.API.Ext.URI                     as  URI
-import qualified    PVK.Com.API.Resource.ISXPick            as  R
+import qualified    TPX.Com.API.Ext.URI                     as  URI
+import qualified    TPX.Com.API.Resource.ISX.Pick           as  R
 
 
 parse :: R.Rock -> S.Set R.OreUrl

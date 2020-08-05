@@ -6,7 +6,7 @@ module ISX.Plugin.CrawlerHTML.Resource.Common (
 
 import              Data.Aeson
 import              Data.Time.Clock                         (UTCTime)
-import              PVK.Com.API.Resource.ISXPick
+import              TPX.Com.API.Resource.ISX.Pick
 
 
 data Apex = Apex {

@@ -5,7 +5,7 @@ import              ISX.Plugin.CrawlerHTML.Parser
 import              ISX.Test
 import              Prelude                                 hiding  (get)
 import qualified    Data.Map.Strict                         as  M
-import qualified    PVK.Com.API.Resource.ISXPick            as  R
+import qualified    TPX.Com.API.Resource.ISX.Pick           as  R
 
 
 spec :: Spec

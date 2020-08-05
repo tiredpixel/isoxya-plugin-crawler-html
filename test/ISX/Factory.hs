@@ -5,9 +5,9 @@ module ISX.Factory (
 
 
 import              Network.URI
-import              PVK.Com.API.Ext.URI
+import              TPX.Com.API.Ext.URI
 import qualified    Data.Text                               as  T
-import qualified    PVK.Com.API.Resource.ISXPick            as  R
+import qualified    TPX.Com.API.Resource.ISX.Pick           as  R
 
 
 fRock :: Text -> Integer -> R.RockHeader -> IO R.Rock

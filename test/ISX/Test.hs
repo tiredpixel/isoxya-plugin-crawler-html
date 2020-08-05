@@ -1,6 +1,6 @@
 module ISX.Test (
     module ISX.Factory,
-    module PVK.Com.API.Test,
+    module TPX.Com.API.Test,
     assertLinksLookup,
     assertResultsLookup,
     withSrv
@@ -10,7 +10,7 @@ module ISX.Test (
 import              Data.Vector                             (Vector)
 import              ISX.Factory
 import              ISX.Plugin.CrawlerHTML.Route
-import              PVK.Com.API.Test
+import              TPX.Com.API.Test
 
 
 assertLinksLookup :: Value -> Text -> IO ()
