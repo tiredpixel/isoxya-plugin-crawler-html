@@ -1,4 +1,4 @@
-module ISX.Plugin.CrawlerHTML.Parser (parse) where
+module ISX.Plug.CrawlerHTML.Parser (parse) where
 
 
 import              Text.HandsomeSoup
@@ -8,15 +8,15 @@ import qualified    Data.Set                                as  S
 import qualified    Data.Text                               as  T
 import qualified    Network.URI                             as  URI
 import qualified    TPX.Com.API.Ext.URI                     as  URI
-import qualified    TPX.Com.API.Resource.ISX.Pick           as  R
+import qualified    TPX.Com.API.Resource.ISX.Proc           as  R
 
 
-parse :: R.Rock -> S.Set R.OreUrl
-parse rock = S.fromList $ normalizeLinks m base links
+parse :: R.ProcI -> S.Set R.ProcOUrl
+parse procI = S.fromList $ normalizeLinks m base links
     where
-        m = R.rockMeta rock
-        h = R.rockHeader rock
-        b = R.rockBody rock
+        m = R.procIMeta procI
+        h = R.procIHeader procI
+        b = R.procIBody procI
         body = fromRight "" $ decodeUtf8' b
         doc p = runLA (hread >>> p) $ toString body
         base = URI.URIAbsolute <$> (URI.parseAbsoluteURI =<< listToMaybe (
@@ -30,7 +30,7 @@ parse rock = S.fromList $ normalizeLinks m base links
             | otherwise = toText <$> pageLinks
 
 
-isHeaderNoFollow :: R.RockHeader -> Bool
+isHeaderNoFollow :: R.ProcIHeader -> Bool
 isHeaderNoFollow h = "nofollow" `S.member` robots
     where
         robots = case M.lookup "X-Robots-Tag" h of
@@ -40,8 +40,8 @@ isHeaderNoFollow h = "nofollow" `S.member` robots
             ("", v) -> T.splitOn "," v
             _ -> []
 
-isHeaderRedirect :: R.RockMeta -> Bool
-isHeaderRedirect m = case R.rockMetaStatusCode m of
+isHeaderRedirect :: R.ProcIMeta -> Bool
+isHeaderRedirect m = case R.procIMetaStatusCode m of
     Just s  -> s `S.member` statusCodeRedirects
     Nothing -> False
 
@@ -52,12 +52,12 @@ isMetaNoFollow metaRobots = "nofollow" `S.member` robots
             Just v  -> S.fromList $ T.strip <$> T.splitOn "," v
             Nothing -> S.empty
 
-normalizeLinks :: R.RockMeta -> Maybe URI.URIAbsolute -> [Text] -> [R.OreUrl]
+normalizeLinks :: R.ProcIMeta -> Maybe URI.URIAbsolute -> [Text] -> [R.ProcOUrl]
 normalizeLinks m base es =
     URI.URIReference . flip URI.relativeTo baseUrl <$>
         mapMaybe (URI.parseURIReference . toString) es
     where
-        baseUrl = URI.unURIAbsolute $ fromMaybe (R.rockMetaUrl m) base
+        baseUrl = URI.unURIAbsolute $ fromMaybe (R.procIMetaUrl m) base
 
 statusCodeRedirects :: S.Set Integer
 statusCodeRedirects = S.fromList [301, 302, 303, 307, 308]

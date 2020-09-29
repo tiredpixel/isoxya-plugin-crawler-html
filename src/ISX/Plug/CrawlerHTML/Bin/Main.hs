@@ -1,7 +1,7 @@
 module Main (main) where
 
 
-import              ISX.Plugin.CrawlerHTML.Route
+import              ISX.Plug.CrawlerHTML.Route
 import qualified    TPX.Com.API.Res                         as  Res
 import qualified    Snap.Http.Server                        as  Srv
 

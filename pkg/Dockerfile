@@ -24,7 +24,7 @@ ENV ADDRESS=localhost \
     PATH=${HOME}/bin:$PATH \
     PORT=8000
 
-CMD isx-plugin-crawler-html -b ${ADDRESS} -p ${PORT}
+CMD isx-plug-crawler-html -b ${ADDRESS} -p ${PORT}
 
 EXPOSE ${PORT}
 

@@ -1,11 +1,11 @@
 cabal-version:          3.0
-name:                   isx-plugin-crawler-html
+name:                   isx-plug-crawler-html
 version:                0.0.0
 synopsis:               Isoxya plugin: Crawler HTML
 license:                NONE
 license-file:           LICENSE
-author:                 tiredpixel
-maintainer:             tiredpixel
+author:                 Nic Williams <tp@tiredpixel.com>
+maintainer:             Nic Williams <tp@tiredpixel.com>
 build-type:             Simple
 extra-source-files:     README.md
 --------------------------------------------------------------------------------
@@ -23,7 +23,7 @@ common shared-properties
         -Wall
         -ddump-minimal-imports
 --------------------------------------------------------------------------------
-library common
+library common-ce
     import:             shared-properties
     exposed-modules:
         TPX.Com.API.Aeson
@@ -31,37 +31,31 @@ library common
         TPX.Com.API.Req
         TPX.Com.API.Res
         TPX.Com.API.Resource.CommonError
-        TPX.Com.API.Resource.ISX.Pick
-        TPX.Com.API.Resource.ISX.PickSnap
-    other-modules:
-        TPX.Com.URL
+        TPX.Com.API.Resource.ISX.Proc
+        TPX.Com.API.Resource.ISX.ProcSnap
     build-depends:
         aeson,
         base64-bytestring,
-        bytestring,
-        http-conduit,
         network-uri,
-        regex-compat,
         snap-core,
         snap-extras,
-        text,
         unix,
         unordered-containers
     hs-source-dirs:
-        lib/common/src
+        lib/common-ce/src
 
-library isx-plugin-crawler-html-int
+library isx-plug-crawler-html-int
     import:             shared-properties
     exposed-modules:
-        ISX.Plugin.CrawlerHTML.Parser
-        ISX.Plugin.CrawlerHTML.Route
-        ISX.Plugin.CrawlerHTML.Zone.Common.Apex
-        ISX.Plugin.CrawlerHTML.Zone.Common.Data
+        ISX.Plug.CrawlerHTML.Parser
+        ISX.Plug.CrawlerHTML.Route
+        ISX.Plug.CrawlerHTML.Zone.Common.Apex
+        ISX.Plug.CrawlerHTML.Zone.Common.Data
     other-modules:
-        ISX.Plugin.CrawlerHTML.Resource.Common
-        Paths_isx_plugin_crawler_html
+        ISX.Plug.CrawlerHTML.Resource.Common
+        Paths_isx_plug_crawler_html
     build-depends:
-        common,
+        common-ce,
         --
         aeson,
         containers,
@@ -75,25 +69,25 @@ library isx-plugin-crawler-html-int
     hs-source-dirs:
         src
 --------------------------------------------------------------------------------
-executable isx-plugin-crawler-html
+executable isx-plug-crawler-html
     import:             shared-properties
     main-is:            Main.hs
     build-depends:
-        common,
-        isx-plugin-crawler-html-int,
+        common-ce,
+        isx-plug-crawler-html-int,
         --
         snap-server
     hs-source-dirs:
-        src/ISX/Plugin/CrawlerHTML/Bin
+        src/ISX/Plug/CrawlerHTML/Bin
     ghc-options:
         -threaded
 --------------------------------------------------------------------------------
-library common-test
+library common-ce-test
     import:             shared-properties
     exposed-modules:
         TPX.Com.API.Test
     build-depends:
-        common,
+        common-ce,
         --
         aeson,
         base64-bytestring,
@@ -108,22 +102,22 @@ library common-test
     mixins:
         relude                          (Relude.Unsafe)
     hs-source-dirs:
-        lib/common/test
+        lib/common-ce/test
 
-test-suite isx-plugin-crawler-html-test
+test-suite isx-plug-crawler-html-test
     import:             shared-properties
     type:               exitcode-stdio-1.0
     main-is:            Spec.hs
     other-modules:
         ISX.Factory
-        ISX.Plugin.CrawlerHTML.ParserSpec
-        ISX.Plugin.CrawlerHTML.Zone.Common.ApexSpec
-        ISX.Plugin.CrawlerHTML.Zone.Common.DataSpec
+        ISX.Plug.CrawlerHTML.ParserSpec
+        ISX.Plug.CrawlerHTML.Zone.Common.ApexSpec
+        ISX.Plug.CrawlerHTML.Zone.Common.DataSpec
         ISX.Test
     build-depends:
-        common,
-        common-test,
-        isx-plugin-crawler-html-int,
+        common-ce,
+        common-ce-test,
+        isx-plug-crawler-html-int,
         --
         containers,
         hspec                           ==  2.*,

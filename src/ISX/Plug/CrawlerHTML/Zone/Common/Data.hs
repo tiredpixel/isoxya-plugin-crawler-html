@@ -1,18 +1,18 @@
-module ISX.Plugin.CrawlerHTML.Zone.Common.Data (
+module ISX.Plug.CrawlerHTML.Zone.Common.Data (
     create
     ) where
 
 
 import              Data.Aeson
-import              ISX.Plugin.CrawlerHTML.Parser
+import              ISX.Plug.CrawlerHTML.Parser
 import              Snap.Core
 import              Snap.Extras.JSON
 import              System.Environment                      (lookupEnv)
-import              TPX.Com.API.Resource.ISX.PickSnap       ()
-import qualified    ISX.Plugin.CrawlerHTML.Resource.Common  as  R
+import              TPX.Com.API.Resource.ISX.ProcSnap       ()
+import qualified    ISX.Plug.CrawlerHTML.Resource.Common    as  R
 import qualified    TPX.Com.API.Req                         as  Req
 import qualified    TPX.Com.API.Res                         as  Res
-import qualified    TPX.Com.API.Resource.ISX.Pick           as  R
+import qualified    TPX.Com.API.Resource.ISX.Proc           as  R
 
 
 create :: Snap ()
@@ -20,13 +20,13 @@ create = do
     reqLim_ <- liftIO $ join <$> (fmap . fmap) readMaybe (lookupEnv "REQ_LIM")
     let reqLim = fromMaybe reqLimDef reqLim_
     req_      <- Req.getBoundedJSON' reqLim >>= Req.validateJSON
-    Just rock <- Res.runValidate req_
-    let links = parse rock
-    writeJSON R.Ore {
-        R.oreData = toJSON R.Data {
-            R.dataHeader     = R.rockHeader rock,
-            R.dataStatusCode = R.rockMetaStatusCode $ R.rockMeta rock},
-        R.oreUrls = links}
+    Just procI <- Res.runValidate req_
+    let links = parse procI
+    writeJSON R.ProcO {
+        R.procOData = toJSON R.Data {
+            R.dataHeader     = R.procIHeader procI,
+            R.dataStatusCode = R.procIMetaStatusCode $ R.procIMeta procI},
+        R.procOUrls = links}
 
 
 reqLimDef :: Int64

@@ -1,4 +1,4 @@
-module ISX.Plugin.CrawlerHTML.Resource.Common (
+module ISX.Plug.CrawlerHTML.Resource.Common (
     Apex(..),
     Data(..)
     ) where
@@ -6,7 +6,7 @@ module ISX.Plugin.CrawlerHTML.Resource.Common (
 
 import              Data.Aeson
 import              Data.Time.Clock                         (UTCTime)
-import              TPX.Com.API.Resource.ISX.Pick
+import              TPX.Com.API.Resource.ISX.Proc
 
 
 data Apex = Apex {
@@ -19,7 +19,7 @@ instance ToJSON Apex where
         "version" .= apexVersion o]
 
 data Data = Data {
-    dataHeader     :: RockHeader,
+    dataHeader     :: ProcIHeader,
     dataStatusCode :: Maybe Integer
     } deriving (Show)
 instance ToJSON Data where

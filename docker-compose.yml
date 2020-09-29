@@ -1,17 +1,17 @@
 version: "2.4"
 services:
-  plugin:
+  plug:
     image: docker.package.tiredpixel.com/isoxya/isoxya-plugin-crawler-html-build:head
     volumes:
-      - ./isx-plugin-crawler-html.cabal:/home/x/repo/isx-plugin-crawler-html.cabal
+      - ./isx-plug-crawler-html.cabal:/home/x/repo/isx-plug-crawler-html.cabal
       - ./lib:/home/x/repo/lib
       - ./src:/home/x/repo/src
       - ./test:/home/x/repo/test
     networks:
-      plugin:
+      plug:
         aliases:
-          - crawler-html.plugins.dev.isoxya.com
+          - crawler-html.plugin.dev.isoxya.com
 networks:
-  plugin:
+  plug:
     external: true
-    name: isoxya_plugin
+    name: isoxya_plug

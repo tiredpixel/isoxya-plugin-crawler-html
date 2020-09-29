@@ -1,4 +1,4 @@
-module ISX.Plugin.CrawlerHTML.Zone.Common.ApexSpec (spec) where
+module ISX.Plug.CrawlerHTML.Zone.Common.ApexSpec (spec) where
 
 
 import              ISX.Test

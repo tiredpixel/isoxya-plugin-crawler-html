@@ -1,9 +1,9 @@
-module ISX.Plugin.CrawlerHTML.Route (site) where
+module ISX.Plug.CrawlerHTML.Route (site) where
 
 
 import              Snap.Core
-import qualified    ISX.Plugin.CrawlerHTML.Zone.Common.Apex as  ZA
-import qualified    ISX.Plugin.CrawlerHTML.Zone.Common.Data as  ZD
+import qualified    ISX.Plug.CrawlerHTML.Zone.Common.Apex   as  ZA
+import qualified    ISX.Plug.CrawlerHTML.Zone.Common.Data   as  ZD
 import qualified    TPX.Com.API.Res                         as  Res
 
 

@@ -1,14 +1,14 @@
-module ISX.Plugin.CrawlerHTML.Zone.Common.Apex (
+module ISX.Plug.CrawlerHTML.Zone.Common.Apex (
     apex
     ) where
 
 
 import              Data.Version                            (showVersion)
-import              Paths_isx_plugin_crawler_html           (version)
+import              Paths_isx_plug_crawler_html             (version)
 import              Snap.Core
 import              Snap.Extras.JSON
 import qualified    Data.Time.Clock                         as  Clock
-import qualified    ISX.Plugin.CrawlerHTML.Resource.Common  as  R
+import qualified    ISX.Plug.CrawlerHTML.Resource.Common    as  R
 
 
 apex :: Snap ()

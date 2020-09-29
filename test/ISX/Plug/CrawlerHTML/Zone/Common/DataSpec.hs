@@ -1,4 +1,4 @@
-module ISX.Plugin.CrawlerHTML.Zone.Common.DataSpec (spec) where
+module ISX.Plug.CrawlerHTML.Zone.Common.DataSpec (spec) where
 
 
 import              ISX.Test
@@ -60,8 +60,8 @@ pC = object [
 
 testPage :: Text -> IO ()
 testPage url = do
-    rock <- fRock url 200 M.empty
-    res <- withSrv $ postJSON "/data" rock
+    procI <- fProcI url 200 M.empty
+    res <- withSrv $ postJSON "/data" procI
     assertSuccess res
     b <- getResponseBody res
     b ^. key "data" . key "header" . _Object `shouldBe` HM.empty

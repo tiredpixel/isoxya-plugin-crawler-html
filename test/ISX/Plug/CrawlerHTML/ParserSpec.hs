@@ -1,11 +1,11 @@
-module ISX.Plugin.CrawlerHTML.ParserSpec (spec) where
+module ISX.Plug.CrawlerHTML.ParserSpec (spec) where
 
 
-import              ISX.Plugin.CrawlerHTML.Parser
+import              ISX.Plug.CrawlerHTML.Parser
 import              ISX.Test
 import              Prelude                                 hiding  (get)
 import qualified    Data.Map.Strict                         as  M
-import qualified    TPX.Com.API.Resource.ISX.Pick           as  R
+import qualified    TPX.Com.API.Resource.ISX.Proc           as  R
 
 
 spec :: Spec
@@ -79,8 +79,8 @@ spec = do
                 ("Location", "https://xkcd.com/")]
 
 
-testPage :: Text -> Integer -> R.RockHeader -> IO ()
+testPage :: Text -> Integer -> R.ProcIHeader -> IO ()
 testPage url status header = do
-    rock <- fRock url status header
-    let links = parse rock
+    procI <- fProcI url status header
+    let links = parse procI
     assertLinksLookup (toJSON links) url
