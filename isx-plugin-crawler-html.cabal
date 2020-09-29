@@ -59,6 +59,7 @@ library isx-plugin-crawler-html-int
         ISX.Plugin.CrawlerHTML.Zone.Common.Data
     other-modules:
         ISX.Plugin.CrawlerHTML.Resource.Common
+        Paths_isx_plugin_crawler_html
     build-depends:
         common,
         --
