@@ -98,6 +98,7 @@ library common-ce-test
         http-link-header,
         lens,
         lens-aeson,
+        network-uri,
         snap-core
     mixins:
         relude                          (Relude.Unsafe)
