@@ -77,7 +77,6 @@ library common-ce-test
         lib-isx-plug-crawler-html,
         --
         aeson,
-        base64-bytestring,
         bytestring,
         directory,
         filepath,
