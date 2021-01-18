@@ -81,6 +81,6 @@ spec = do
 
 testPage :: Text -> Integer -> PlugProcIHeader -> IO ()
 testPage url status header = do
-    procI <- fPlugProcI url status header
-    let links = parse procI
+    ppi <- fPlugProcI url status header
+    let links = parse ppi
     assertLinksLookup (toJSON links) url
