@@ -15,7 +15,7 @@ spec =
             assertSuccess res
             b <- getResponseBody res
             b ^. key "data" . key "header" . _Object `shouldBe` HM.empty
-            b ^? key "data" . key "status_code" . _Integer `shouldBe` Nothing
+            b ^? key "data" . key "status" . _Integer `shouldBe` Nothing
             length (b ^. key "data" . _Object) `shouldBe` 2
             length (b ^. key "urls" . _Array) `shouldBe` 0
             assertElemN res 2
@@ -28,20 +28,20 @@ spec =
             assertSuccess res
             b <- getResponseBody res
             b ^. key "data" . key "header" . key "Content-Type" . _String `shouldBe` "application/pdf"
-            b ^? key "data" . key "status_code" . _Integer `shouldBe` Nothing
+            b ^? key "data" . key "status" . _Integer `shouldBe` Nothing
             length (b ^. key "data" . _Object) `shouldBe` 2
             length (b ^. key "urls" . _Array) `shouldBe` 0
             assertElemN res 2
         
-        it "ok status-code" $ do
+        it "ok status" $ do
             let pC' = mergeObject pC $ object [
                     ("meta", object [
-                        ("status_code", Number 418)])]
+                        ("status", Number 418)])]
             res <- withSrv $ postJSON "/data" pC'
             assertSuccess res
             b <- getResponseBody res
             b ^. key "data" . key "header" . _Object `shouldBe` HM.empty
-            b ^? key "data" . key "status_code" . _Integer `shouldBe` Just 418
+            b ^? key "data" . key "status" . _Integer `shouldBe` Just 418
             length (b ^. key "data" . _Object) `shouldBe` 2
             length (b ^. key "urls" . _Array) `shouldBe` 0
             assertElemN res 2
@@ -60,12 +60,12 @@ pC = object [
 
 testPage :: Text -> IO ()
 testPage url = do
-    procI <- fProcI url 200 M.empty
+    procI <- fPlugProcI url 200 M.empty
     res <- withSrv $ postJSON "/data" procI
     assertSuccess res
     b <- getResponseBody res
     b ^. key "data" . key "header" . _Object `shouldBe` HM.empty
-    b ^? key "data" . key "status_code" . _Integer `shouldBe` Just 200
+    b ^? key "data" . key "status" . _Integer `shouldBe` Just 200
     length (b ^. key "data" . _Object) `shouldBe` 2
     assertResultsLookup (b ^. key "urls" . _Array) url
     assertElemN res 2

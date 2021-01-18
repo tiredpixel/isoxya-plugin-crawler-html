@@ -5,7 +5,7 @@ import              ISX.Plug.CrawlerHTML.Parser
 import              ISX.Test
 import              Prelude                                 hiding  (get)
 import qualified    Data.Map.Strict                         as  M
-import qualified    TPX.Com.API.Resource.ISX.Proc           as  R
+import qualified    TPX.Com.ISX.PlugProc                    as  R
 
 
 spec :: Spec
@@ -79,8 +79,8 @@ spec = do
                 ("Location", "https://xkcd.com/")]
 
 
-testPage :: Text -> Integer -> R.ProcIHeader -> IO ()
+testPage :: Text -> Integer -> R.PlugProcIHeader -> IO ()
 testPage url status header = do
-    procI <- fProcI url status header
+    procI <- fPlugProcI url status header
     let links = parse procI
     assertLinksLookup (toJSON links) url

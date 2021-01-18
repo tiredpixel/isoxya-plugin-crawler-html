@@ -7,16 +7,16 @@ import qualified    Data.Map                                as  M
 import qualified    Data.Set                                as  S
 import qualified    Data.Text                               as  T
 import qualified    Network.URI                             as  URI
-import qualified    TPX.Com.API.Ext.URI                     as  URI
-import qualified    TPX.Com.API.Resource.ISX.Proc           as  R
+import qualified    TPX.Com.ISX.PlugProc                    as  R
+import qualified    TPX.Com.URI                             as  URI
 
 
-parse :: R.ProcI -> S.Set R.ProcOUrl
+parse :: R.PlugProcI -> S.Set R.PlugProcOURL
 parse procI = S.fromList $ normalizeLinks m base links
     where
-        m = R.procIMeta procI
-        h = R.procIHeader procI
-        b = R.procIBody procI
+        m = R.plugProcIMeta procI
+        h = R.plugProcIHeader procI
+        b = R.plugProcIBody procI
         body = fromRight "" $ decodeUtf8' b
         doc p = runLA (hread >>> p) $ toString body
         base = URI.URIAbsolute <$> (URI.parseAbsoluteURI =<< listToMaybe (
@@ -30,7 +30,7 @@ parse procI = S.fromList $ normalizeLinks m base links
             | otherwise = toText <$> pageLinks
 
 
-isHeaderNoFollow :: R.ProcIHeader -> Bool
+isHeaderNoFollow :: R.PlugProcIHeader -> Bool
 isHeaderNoFollow h = "nofollow" `S.member` robots
     where
         robots = case M.lookup "X-Robots-Tag" h of
@@ -40,9 +40,9 @@ isHeaderNoFollow h = "nofollow" `S.member` robots
             ("", v) -> T.splitOn "," v
             _ -> []
 
-isHeaderRedirect :: R.ProcIMeta -> Bool
-isHeaderRedirect m = case R.procIMetaStatusCode m of
-    Just s  -> s `S.member` statusCodeRedirects
+isHeaderRedirect :: R.PlugProcIMeta -> Bool
+isHeaderRedirect m = case R.plugProcIMetaStatus m of
+    Just s  -> s `S.member` statusRedirects
     Nothing -> False
 
 isMetaNoFollow :: [Text] -> Bool
@@ -52,12 +52,12 @@ isMetaNoFollow metaRobots = "nofollow" `S.member` robots
             Just v  -> S.fromList $ T.strip <$> T.splitOn "," v
             Nothing -> S.empty
 
-normalizeLinks :: R.ProcIMeta -> Maybe URI.URIAbsolute -> [Text] -> [R.ProcOUrl]
+normalizeLinks :: R.PlugProcIMeta -> Maybe URI.URIAbsolute -> [Text] -> [R.PlugProcOURL]
 normalizeLinks m base es =
-    URI.URIReference . flip URI.relativeTo baseUrl <$>
+    URI.URIReference . flip URI.relativeTo baseURL <$>
         mapMaybe (URI.parseURIReference . toString) es
     where
-        baseUrl = URI.unURIAbsolute $ fromMaybe (R.procIMetaUrl m) base
+        baseURL = URI.unURIAbsolute $ fromMaybe (R.plugProcIMetaURL m) base
 
-statusCodeRedirects :: S.Set Integer
-statusCodeRedirects = S.fromList [301, 302, 303, 307, 308]
+statusRedirects :: S.Set Integer
+statusRedirects = S.fromList [301, 302, 303, 307, 308]

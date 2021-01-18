@@ -6,7 +6,7 @@ module ISX.Plug.CrawlerHTML.Resource.Common (
 
 import              Data.Aeson
 import              Data.Time.Clock                         (UTCTime)
-import              TPX.Com.API.Resource.ISX.Proc
+import              TPX.Com.ISX.PlugProc
 
 
 data Apex = Apex {
@@ -19,10 +19,10 @@ instance ToJSON Apex where
         "version" .= apexVersion o]
 
 data Data = Data {
-    dataHeader     :: ProcIHeader,
-    dataStatusCode :: Maybe Integer
+    dataHeader :: PlugProcIHeader,
+    dataStatus :: Maybe Integer
     } deriving (Show)
 instance ToJSON Data where
     toJSON o = object [
-        "header"      .= dataHeader o,
-        "status_code" .= dataStatusCode o]
+        "header" .= dataHeader o,
+        "status" .= dataStatus o]
