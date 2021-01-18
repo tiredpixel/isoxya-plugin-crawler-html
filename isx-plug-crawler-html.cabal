@@ -31,9 +31,9 @@ library lib-isx-plug-crawler-html
         TPX.Com.ISX.PlugProc
         TPX.Com.URI
     other-modules:
-        ISX.Plug.CrawlerHTML.Resource.Common
-        ISX.Plug.CrawlerHTML.Zone.Common.Apex
-        ISX.Plug.CrawlerHTML.Zone.Common.Data
+        ISX.Plug.CrawlerHTML.Resource
+        ISX.Plug.CrawlerHTML.Zone.Apex
+        ISX.Plug.CrawlerHTML.Zone.Data
         Paths_isx_plug_crawler_html
         TPX.Com.API.Req
         TPX.Com.API.Resource

@@ -1,6 +1,9 @@
-module ISX.Plug.CrawlerHTML.Resource.Common (
+{-# LANGUAGE RecordWildCards #-}
+
+
+module ISX.Plug.CrawlerHTML.Resource (
     Apex(..),
-    Data(..)
+    Data(..),
     ) where
 
 
@@ -14,15 +17,15 @@ data Apex = Apex {
     apexVersion :: Text
     } deriving (Show)
 instance ToJSON Apex where
-    toJSON o = object [
-        "t_now"   .= apexTNow o,
-        "version" .= apexVersion o]
+    toJSON Apex{..} = object [
+        "t_now"   .= apexTNow,
+        "version" .= apexVersion]
 
 data Data = Data {
     dataHeader :: PlugProcIHeader,
     dataStatus :: Maybe Integer
     } deriving (Show)
 instance ToJSON Data where
-    toJSON o = object [
-        "header" .= dataHeader o,
-        "status" .= dataStatus o]
+    toJSON Data{..} = object [
+        "header" .= dataHeader,
+        "status" .= dataStatus]
