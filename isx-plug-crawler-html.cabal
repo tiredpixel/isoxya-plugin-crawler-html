@@ -3,13 +3,11 @@ name:                   isx-plug-crawler-html
 version:                0.0.0
 synopsis:               Isoxya plugin: Crawler HTML
 license:                BSD-3-Clause
-license-file:           LICENSE
 author:                 Nic Williams <tp@tiredpixel.com>
 maintainer:             Nic Williams <tp@tiredpixel.com>
 build-type:             Simple
-extra-source-files:     README.md
 --------------------------------------------------------------------------------
-common shared-properties
+common common-properties
     build-depends:
         base                            ==  4.13.*,
         relude
@@ -23,41 +21,26 @@ common shared-properties
         -Wall
         -ddump-minimal-imports
 --------------------------------------------------------------------------------
-library common-ce
-    import:             shared-properties
+library lib-isx-plug-crawler-html
+    import:             common-properties
     exposed-modules:
+        ISX.Plug.CrawlerHTML.Parser
+        ISX.Plug.CrawlerHTML.Route
         TPX.Com.API.Aeson
         TPX.Com.API.Ext.URI
-        TPX.Com.API.Req
         TPX.Com.API.Res
-        TPX.Com.API.Resource.CommonError
         TPX.Com.API.Resource.ISX.Proc
+    other-modules:
+        ISX.Plug.CrawlerHTML.Resource.Common
+        ISX.Plug.CrawlerHTML.Zone.Common.Apex
+        ISX.Plug.CrawlerHTML.Zone.Common.Data
+        Paths_isx_plug_crawler_html
+        TPX.Com.API.Req
+        TPX.Com.API.Resource.CommonError
         TPX.Com.API.Resource.ISX.ProcSnap
     build-depends:
         aeson,
         base64-bytestring,
-        network-uri,
-        snap-core,
-        snap-extras,
-        unix,
-        unordered-containers
-    hs-source-dirs:
-        lib/common-ce/src
-
-library isx-plug-crawler-html-int
-    import:             shared-properties
-    exposed-modules:
-        ISX.Plug.CrawlerHTML.Parser
-        ISX.Plug.CrawlerHTML.Route
-        ISX.Plug.CrawlerHTML.Zone.Common.Apex
-        ISX.Plug.CrawlerHTML.Zone.Common.Data
-    other-modules:
-        ISX.Plug.CrawlerHTML.Resource.Common
-        Paths_isx_plug_crawler_html
-    build-depends:
-        common-ce,
-        --
-        aeson,
         containers,
         HandsomeSoup,
         hxt,
@@ -65,29 +48,33 @@ library isx-plug-crawler-html-int
         snap-core,
         snap-extras,
         text,
-        time
+        time,
+        unix,
+        unordered-containers,
     hs-source-dirs:
+        lib/common-ce/src
         src
 --------------------------------------------------------------------------------
 executable isx-plug-crawler-html
-    import:             shared-properties
-    main-is:            Main.hs
+    import:             common-properties
+    main-is:            CrawlerHTML.hs
+    other-modules:
+        Paths_isx_plug_crawler_html
     build-depends:
-        common-ce,
-        isx-plug-crawler-html-int,
+        lib-isx-plug-crawler-html,
         --
-        snap-server
+        snap-server,
     hs-source-dirs:
-        src/ISX/Plug/CrawlerHTML/Bin
+        src/ISX/Plug/Bin
     ghc-options:
         -threaded
 --------------------------------------------------------------------------------
 library common-ce-test
-    import:             shared-properties
+    import:             common-properties
     exposed-modules:
         TPX.Com.API.Test
     build-depends:
-        common-ce,
+        lib-isx-plug-crawler-html,
         --
         aeson,
         base64-bytestring,
@@ -99,14 +86,14 @@ library common-ce-test
         lens,
         lens-aeson,
         network-uri,
-        snap-core
+        snap-core,
     mixins:
         relude                          (Relude.Unsafe)
     hs-source-dirs:
         lib/common-ce/test
-
-test-suite isx-plug-crawler-html-test
-    import:             shared-properties
+--------------------------------------------------------------------------------
+test-suite test-isx-plug-crawler-html
+    import:             common-properties
     type:               exitcode-stdio-1.0
     main-is:            Spec.hs
     other-modules:
@@ -116,16 +103,15 @@ test-suite isx-plug-crawler-html-test
         ISX.Plug.CrawlerHTML.Zone.Common.DataSpec
         ISX.Test
     build-depends:
-        common-ce,
         common-ce-test,
-        isx-plug-crawler-html-int,
+        lib-isx-plug-crawler-html,
         --
         containers,
         hspec                           ==  2.*,
         network-uri,
         text,
         unordered-containers,
-        vector
+        vector,
     hs-source-dirs:
         test
     build-tool-depends:

@@ -20,8 +20,8 @@ USER ${USER}
 
 WORKDIR ${HOME}
 
-ENV ADDRESS=localhost \
-    PATH=${HOME}/bin:$PATH \
+ENV PATH=${HOME}/bin:$PATH \
+    ADDRESS=localhost \
     PORT=8000
 
 CMD isx-plug-crawler-html -b ${ADDRESS} -p ${PORT}
