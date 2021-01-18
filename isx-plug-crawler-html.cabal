@@ -99,8 +99,8 @@ test-suite test-isx-plug-crawler-html
     other-modules:
         ISX.Factory
         ISX.Plug.CrawlerHTML.ParserSpec
-        ISX.Plug.CrawlerHTML.Zone.Common.ApexSpec
-        ISX.Plug.CrawlerHTML.Zone.Common.DataSpec
+        ISX.Plug.CrawlerHTML.Zone.ApexSpec
+        ISX.Plug.CrawlerHTML.Zone.DataSpec
         ISX.Test
     build-depends:
         common-ce-test,

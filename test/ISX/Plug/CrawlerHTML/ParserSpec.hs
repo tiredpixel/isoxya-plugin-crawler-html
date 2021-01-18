@@ -4,8 +4,8 @@ module ISX.Plug.CrawlerHTML.ParserSpec (spec) where
 import              ISX.Plug.CrawlerHTML.Parser
 import              ISX.Test
 import              Prelude                                 hiding  (get)
+import              TPX.Com.ISX.PlugProc
 import qualified    Data.Map.Strict                         as  M
-import qualified    TPX.Com.ISX.PlugProc                    as  R
 
 
 spec :: Spec
@@ -79,7 +79,7 @@ spec = do
                 ("Location", "https://xkcd.com/")]
 
 
-testPage :: Text -> Integer -> R.PlugProcIHeader -> IO ()
+testPage :: Text -> Integer -> PlugProcIHeader -> IO ()
 testPage url status header = do
     procI <- fPlugProcI url status header
     let links = parse procI

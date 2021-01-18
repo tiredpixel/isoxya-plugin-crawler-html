@@ -1,4 +1,4 @@
-module ISX.Plug.CrawlerHTML.Zone.Common.DataSpec (spec) where
+module ISX.Plug.CrawlerHTML.Zone.DataSpec (spec) where
 
 
 import              ISX.Test
@@ -9,7 +9,7 @@ import qualified    Data.Map.Strict                         as  M
 
 spec :: Spec
 spec =
-    describe "/data POST" $ do
+    describe "create" $ do
         it "ok" $ do
             res <- withSrv $ postJSON "/data" pC
             assertSuccess res
@@ -60,8 +60,8 @@ pC = object [
 
 testPage :: Text -> IO ()
 testPage url = do
-    procI <- fPlugProcI url 200 M.empty
-    res <- withSrv $ postJSON "/data" procI
+    ppi <- fPlugProcI url 200 M.empty
+    res <- withSrv $ postJSON "/data" ppi
     assertSuccess res
     b <- getResponseBody res
     b ^. key "data" . key "header" . _Object `shouldBe` HM.empty
