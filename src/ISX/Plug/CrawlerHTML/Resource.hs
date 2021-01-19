@@ -22,10 +22,16 @@ instance ToJSON Apex where
         "version" .= apexVersion]
 
 data Data = Data {
-    dataHeader :: PlugProcIHeader,
-    dataStatus :: Maybe Integer
+    dataHeader   :: PlugProcIHeader,
+    dataMethod   :: Text,
+    dataStatus   :: Maybe Integer,
+    dataDuration :: Maybe Rational,
+    dataErr      :: Maybe Text
     } deriving (Show)
 instance ToJSON Data where
     toJSON Data{..} = object [
-        "header" .= dataHeader,
-        "status" .= dataStatus]
+        "header"   .= dataHeader,
+        "method"   .= dataMethod,
+        "status"   .= dataStatus,
+        "duration" .= dataDuration,
+        "err"      .= dataErr]

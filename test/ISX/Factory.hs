@@ -20,9 +20,12 @@ fPlugProcI url status header = do
     where
         Just metaURL = parseURL url
         meta = PlugProcIMeta {
-            plugProcIMetaURL    = metaURL,
-            plugProcIMetaStatus = Just status,
-            plugProcIMetaConfig = Nothing}
+            plugProcIMetaURL      = metaURL,
+            plugProcIMetaMethod   = "GET",
+            plugProcIMetaStatus   = Just status,
+            plugProcIMetaDuration = Nothing,
+            plugProcIMetaErr      = Nothing,
+            plugProcIMetaConfig   = Nothing}
 
 fxExt :: Text -> Text
 fxExt url = if T.takeEnd 1 url == "/"

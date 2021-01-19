@@ -15,8 +15,11 @@ spec =
             assertSuccess res
             b <- getResponseBody res
             b ^. key "data" . key "header" . _Object `shouldBe` HM.empty
+            b ^. key "data" . key "method" . _String `shouldBe` "GET"
             b ^? key "data" . key "status" . _Integer `shouldBe` Nothing
-            length (b ^. key "data" . _Object) `shouldBe` 2
+            b ^? key "data" . key "duration" . _Object `shouldBe` Nothing
+            b ^? key "data" . key "err" . _String `shouldBe` Nothing
+            length (b ^. key "data" . _Object) `shouldBe` 5
             length (b ^. key "urls" . _Array) `shouldBe` 0
             assertElemN res 2
         
@@ -28,8 +31,11 @@ spec =
             assertSuccess res
             b <- getResponseBody res
             b ^. key "data" . key "header" . key "Content-Type" . _String `shouldBe` "application/pdf"
+            b ^. key "data" . key "method" . _String `shouldBe` "GET"
             b ^? key "data" . key "status" . _Integer `shouldBe` Nothing
-            length (b ^. key "data" . _Object) `shouldBe` 2
+            b ^? key "data" . key "duration" . _Object `shouldBe` Nothing
+            b ^? key "data" . key "err" . _String `shouldBe` Nothing
+            length (b ^. key "data" . _Object) `shouldBe` 5
             length (b ^. key "urls" . _Array) `shouldBe` 0
             assertElemN res 2
         
@@ -41,8 +47,11 @@ spec =
             assertSuccess res
             b <- getResponseBody res
             b ^. key "data" . key "header" . _Object `shouldBe` HM.empty
+            b ^. key "data" . key "method" . _String `shouldBe` "GET"
             b ^? key "data" . key "status" . _Integer `shouldBe` Just 418
-            length (b ^. key "data" . _Object) `shouldBe` 2
+            b ^? key "data" . key "duration" . _Object `shouldBe` Nothing
+            b ^? key "data" . key "err" . _String `shouldBe` Nothing
+            length (b ^. key "data" . _Object) `shouldBe` 5
             length (b ^. key "urls" . _Array) `shouldBe` 0
             assertElemN res 2
         
@@ -54,7 +63,8 @@ spec =
 pC :: Value
 pC = object [
     ("meta", object [
-        ("url", "http://example.com:80/")]),
+        ("url", "http://example.com:80/"),
+        ("method", "GET")]),
     ("header", object []),
     ("body", String "")]
 
@@ -65,7 +75,10 @@ testPage url = do
     assertSuccess res
     b <- getResponseBody res
     b ^. key "data" . key "header" . _Object `shouldBe` HM.empty
+    b ^. key "data" . key "method" . _String `shouldBe` "GET"
     b ^? key "data" . key "status" . _Integer `shouldBe` Just 200
-    length (b ^. key "data" . _Object) `shouldBe` 2
+    b ^? key "data" . key "duration" . _Object `shouldBe` Nothing
+    b ^? key "data" . key "err" . _String `shouldBe` Nothing
+    length (b ^. key "data" . _Object) `shouldBe` 5
     assertResultsLookup (b ^. key "urls" . _Array) url
     assertElemN res 2

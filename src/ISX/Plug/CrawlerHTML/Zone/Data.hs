@@ -19,8 +19,11 @@ create = do
     req_     <- getBoundedJSON' reqLim >>= validateJSON
     Just req <- runValidate req_
     let dat = Data {
-        dataHeader = plugProcIHeader req,
-        dataStatus = plugProcIMetaStatus $ plugProcIMeta req}
+        dataHeader   = plugProcIHeader req,
+        dataMethod   = plugProcIMetaMethod $ plugProcIMeta req,
+        dataStatus   = plugProcIMetaStatus $ plugProcIMeta req,
+        dataDuration = plugProcIMetaDuration (plugProcIMeta req),
+        dataErr      = plugProcIMetaErr $ plugProcIMeta req}
     let urls = parse req
     writeJSON PlugProcO {
         plugProcOData = toJSON dat,
