@@ -3,16 +3,14 @@ module ISX.Plug.CrawlerHTML.Zone.Apex (
     ) where
 
 
-import              Data.Version                            (showVersion)
-import              ISX.Plug.CrawlerHTML.Resource
-import              Paths_isx_plug_crawler_html             (version)
-import              Snap.Core
-import              Snap.Extras.JSON
-import qualified    Data.Time.Clock                         as  Clock
+import Data.Time.Clock
+import Data.Version                (showVersion)
+import ISX.Plug.CrawlerHTML.Core
+import Paths_isx_plug_crawler_html (version)
 
 
-apex :: Snap ()
+apex :: Handler b CrawlerHTML ()
 apex = do
-    t <- liftIO Clock.getCurrentTime
+    t <- liftIO getCurrentTime
     let v = toText $ showVersion version
     writeJSON $ Apex t v

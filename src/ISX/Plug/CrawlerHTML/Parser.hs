@@ -1,14 +1,14 @@
 module ISX.Plug.CrawlerHTML.Parser (parse) where
 
 
-import              Network.URI
-import              TPX.Com.ISX.PlugProc
-import              TPX.Com.URI
-import              Text.HandsomeSoup
-import              Text.XML.HXT.Core
-import qualified    Data.Map                                as  M
-import qualified    Data.Set                                as  S
-import qualified    Data.Text                               as  T
+import           Network.URI
+import           TPX.Com.Isoxya.PlugProc
+import           TPX.Com.URI
+import           Text.HandsomeSoup
+import           Text.XML.HXT.Core
+import qualified Data.Map                as M
+import qualified Data.Set                as S
+import qualified Data.Text               as T
 
 
 parse :: PlugProcI -> S.Set PlugProcOURL

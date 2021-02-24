@@ -7,9 +7,9 @@ module ISX.Plug.CrawlerHTML.Resource (
     ) where
 
 
-import              Data.Aeson
-import              Data.Time.Clock                         (UTCTime)
-import              TPX.Com.ISX.PlugProc
+import Data.Aeson
+import Data.Time.Clock
+import TPX.Com.Isoxya.PlugProc
 
 
 data Apex = Apex {

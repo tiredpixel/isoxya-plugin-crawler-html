@@ -1,22 +1,31 @@
+{-# LANGUAGE TemplateHaskell #-}
+
+
 module Main (main) where
 
 
-import              Data.Version                            (showVersion)
-import              ISX.Plug.CrawlerHTML.Route
-import              Paths_isx_plug_crawler_html             (version)
-import              TPX.Com.API.Res
-import qualified    Snap.Http.Server                        as  Srv
+import Control.Lens                (makeLenses)
+import Data.Version                (showVersion)
+import ISX.Plug.CrawlerHTML
+import Paths_isx_plug_crawler_html (version)
+import Snap.Snaplet
+import System.IO
+import TPX.Com.Snap.CoreUtils
 
+
+newtype App = App {
+    _crawlerHTML :: Snaplet CrawlerHTML}
+
+makeLenses ''App
 
 main :: IO ()
 main = do
     let ver = toText $ showVersion version
-    putTextLn ver
-    cEmp <- Srv.commandLineConfig Srv.emptyConfig
-    Srv.httpServe (conf cEmp) site
-    where
-        cLog = Srv.ConfigFileLog "-"
-        conf =
-            Srv.setAccessLog cLog .
-            Srv.setErrorLog cLog .
-            Srv.setErrorHandler intErr'
+    hPutStrLn stderr $ toString ver
+    serveSnaplet snapCfg initApp
+
+
+initApp :: SnapletInit App App
+initApp = makeSnaplet "app" "Isoxya plugin: Crawler HTML" Nothing $ do
+    crawlerHTML' <- nestSnaplet "" crawlerHTML initCrawlerHTML
+    return $ App crawlerHTML'

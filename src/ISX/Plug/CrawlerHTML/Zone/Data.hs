@@ -3,18 +3,12 @@ module ISX.Plug.CrawlerHTML.Zone.Data (
     ) where
 
 
-import              Data.Aeson
-import              ISX.Plug.CrawlerHTML.Parser
-import              ISX.Plug.CrawlerHTML.Resource
-import              Snap.Core
-import              Snap.Extras.JSON
-import              TPX.Com.API.Req
-import              TPX.Com.API.Res
-import              TPX.Com.ISX.PlugProc
-import              TPX.Com.ISX.PlugProcSnap                ()
+import ISX.Plug.CrawlerHTML.Core
+import TPX.Com.Isoxya.PlugProc
+import TPX.Com.Isoxya.Snap.PlugProc ()
 
 
-create :: Snap ()
+create :: Handler b CrawlerHTML ()
 create = do
     req_     <- getBoundedJSON' reqLim >>= validateJSON
     Just req <- runValidate req_
@@ -22,7 +16,7 @@ create = do
         dataHeader   = plugProcIHeader req,
         dataMethod   = plugProcIMetaMethod $ plugProcIMeta req,
         dataStatus   = plugProcIMetaStatus $ plugProcIMeta req,
-        dataDuration = plugProcIMetaDuration (plugProcIMeta req),
+        dataDuration = plugProcIMetaDuration $ plugProcIMeta req,
         dataErr      = plugProcIMetaErr $ plugProcIMeta req}
     let urls = parse req
     writeJSON PlugProcO {

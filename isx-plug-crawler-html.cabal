@@ -24,20 +24,20 @@ common common-properties
 library lib-isx-plug-crawler-html
     import:             common-properties
     exposed-modules:
-        ISX.Plug.CrawlerHTML.Parser
-        ISX.Plug.CrawlerHTML.Route
-        TPX.Com.API.Aeson
-        TPX.Com.API.Res
-        TPX.Com.ISX.PlugProc
+        ISX.Plug.CrawlerHTML
+        ISX.Plug.CrawlerHTML.Core
+        TPX.Com.Isoxya.PlugProc
+        TPX.Com.Snap.CoreUtils
         TPX.Com.URI
     other-modules:
+        Paths_isx_plug_crawler_html
+        ISX.Plug.CrawlerHTML.Init
+        ISX.Plug.CrawlerHTML.Parser
         ISX.Plug.CrawlerHTML.Resource
+        ISX.Plug.CrawlerHTML.Types
         ISX.Plug.CrawlerHTML.Zone.Apex
         ISX.Plug.CrawlerHTML.Zone.Data
-        Paths_isx_plug_crawler_html
-        TPX.Com.API.Req
-        TPX.Com.API.Resource
-        TPX.Com.ISX.PlugProcSnap
+        TPX.Com.Isoxya.Snap.PlugProc
     build-depends:
         aeson,
         base64-bytestring,
@@ -76,7 +76,9 @@ executable isx-plug-crawler-html
 library common-ce-test
     import:             common-properties
     exposed-modules:
-        TPX.Com.API.Test
+        TPX.Com.Snap.Test
+    other-modules:
+        TPX.Com.Snap.TestUtils
     build-depends:
         lib-isx-plug-crawler-html,
         --
@@ -106,16 +108,16 @@ test-suite test-isx-plug-crawler-html
     type:               exitcode-stdio-1.0
     main-is:            Spec.hs
     other-modules:
-        ISX.Factory
         ISX.Plug.CrawlerHTML.ParserSpec
+        ISX.Plug.CrawlerHTML.Test
         ISX.Plug.CrawlerHTML.Zone.ApexSpec
         ISX.Plug.CrawlerHTML.Zone.DataSpec
-        ISX.Test
     build-depends:
         common-ce-test,
         lib-isx-plug-crawler-html,
         --
         base64-bytestring,
+        containers,
         directory,
         hspec                           ==  2.*,
         network-uri,
@@ -123,6 +125,7 @@ test-suite test-isx-plug-crawler-html
         text,
         time,
         unordered-containers,
+        vector,
     default-extensions:
         NoImplicitPrelude
     hs-source-dirs:
