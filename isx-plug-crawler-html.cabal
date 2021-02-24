@@ -116,16 +116,10 @@ test-suite test-isx-plug-crawler-html
         common-ce-test,
         lib-isx-plug-crawler-html,
         --
-        base64-bytestring,
         containers,
-        directory,
         hspec                           ==  2.*,
         network-uri,
-        snap,
         text,
-        time,
-        unordered-containers,
-        vector,
     default-extensions:
         NoImplicitPrelude
     hs-source-dirs:
