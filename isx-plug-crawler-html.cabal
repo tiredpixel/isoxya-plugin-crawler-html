@@ -44,9 +44,12 @@ library lib-isx-plug-crawler-html
         containers,
         HandsomeSoup,
         hxt,
+        lens,
         network-uri,
+        snap,
         snap-core,
         snap-extras,
+        snap-server,
         text,
         time,
         unix,
@@ -63,7 +66,8 @@ executable isx-plug-crawler-html
     build-depends:
         lib-isx-plug-crawler-html,
         --
-        snap-server,
+        lens,
+        snap,
     hs-source-dirs:
         src/ISX/Plug/Bin
     ghc-options:
@@ -77,17 +81,23 @@ library common-ce-test
         lib-isx-plug-crawler-html,
         --
         aeson,
+        base64-bytestring,
         bytestring,
+        containers,
         directory,
         filepath,
         hspec                           ==  2.*,
+        hspec-core,
+        hspec-snap,
         http-link-header,
         lens,
         lens-aeson,
+        mtl,
         network-uri,
+        process,
         snap-core,
-    mixins:
-        relude                          (Relude.Unsafe)
+        text,
+        unordered-containers,
     hs-source-dirs:
         lib/common-ce/test
 --------------------------------------------------------------------------------
@@ -105,12 +115,16 @@ test-suite test-isx-plug-crawler-html
         common-ce-test,
         lib-isx-plug-crawler-html,
         --
-        containers,
+        base64-bytestring,
+        directory,
         hspec                           ==  2.*,
         network-uri,
+        snap,
         text,
+        time,
         unordered-containers,
-        vector,
+    default-extensions:
+        NoImplicitPrelude
     hs-source-dirs:
         test
     build-tool-depends:
