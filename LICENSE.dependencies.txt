@@ -160,6 +160,8 @@
     License:  MIT
 * hspec-expectations
     License:  MIT
+* hspec-snap
+    License:  BSD3
 * http-api-data
     License:  BSD3
 * http-link-header
