@@ -2,9 +2,7 @@ module ISX.Plug.CrawlerHTML.ParserSpec (spec) where
 
 
 import           ISX.Plug.CrawlerHTML.Test
-import           Network.URI
 import           TPX.Com.Isoxya.PlugProc
-import           TPX.Com.URI
 import qualified Data.Map.Strict           as M
 
 
@@ -102,28 +100,10 @@ fixtureLink' url = do
     ls <- readFileText $ fixtureLink url
     return $ decode $ encodeUtf8 ls
 
-plugProcI :: MonadIO m => Text -> Integer -> PlugProcIHeader -> m PlugProcI
-plugProcI url status header = do
-    body <- liftIO $ readFileBS $ fixturePage url
-    return PlugProcI {
-        plugProcIMeta   = meta,
-        plugProcIHeader = header,
-        plugProcIBody   = body}
-    where
-        Just metaURL = URIAbsolute <$>
-            parseAbsoluteURI (toString $ "http://" <> url)
-        meta = PlugProcIMeta {
-            plugProcIMetaURL      = metaURL,
-            plugProcIMetaMethod   = "GET",
-            plugProcIMetaStatus   = Just status,
-            plugProcIMetaDuration = Nothing,
-            plugProcIMetaErr      = Nothing,
-            plugProcIMetaConfig   = Nothing}
-
 testPage :: (MonadFail m, MonadIO m) => Text -> Integer -> PlugProcIHeader ->
     m (Set PlugProcOURL, Set PlugProcOURL)
 testPage url status header = do
-    i <- plugProcI url status header
+    i <- genPlugProcI url status header
     let linksA = parse i
     Just linksE <- fixtureLink' url
     return (linksA, linksE)
