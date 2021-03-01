@@ -21,24 +21,53 @@ common common-properties
         -Wall
         -ddump-minimal-imports
 --------------------------------------------------------------------------------
+library lib-common-ce
+    import:             common-properties
+    exposed-modules:
+        --TPX.Com.Cursor
+        --TPX.Com.Isoxya.PlugProc
+        --TPX.Com.Isoxya.PlugStrm
+        --TPX.Com.Net
+        --TPX.Com.Snap.CoreUtils
+        --TPX.Com.URI
+    build-depends:
+        aeson,
+        base64-bytestring,
+        bytestring,
+        conduit,
+        conduit-extra,
+        http-conduit,
+        http-types,
+        network-uri,
+        regex-compat,
+        resourcet,
+        safe,
+        snap-core,
+        snap-extras,
+        snap-server,
+        time,
+        unix,
+        unordered-containers,
+    hs-source-dirs:
+        lib/common-ce/src
+--------------------------------------------------------------------------------
 library lib-isx-plug-crawler-html
     import:             common-properties
     exposed-modules:
-        ISX.Plug.CrawlerHTML
-        ISX.Plug.CrawlerHTML.Core
-        TPX.Com.Isoxya.PlugProc
-        TPX.Com.Snap.CoreUtils
-        TPX.Com.URI
     other-modules:
         Paths_isx_plug_crawler_html
+        --
+        ISX.Plug.CrawlerHTML
+        ISX.Plug.CrawlerHTML.Core
         ISX.Plug.CrawlerHTML.Init
         ISX.Plug.CrawlerHTML.Parser
         ISX.Plug.CrawlerHTML.Resource
         ISX.Plug.CrawlerHTML.Types
         ISX.Plug.CrawlerHTML.Zone.Apex
         ISX.Plug.CrawlerHTML.Zone.Data
-        TPX.Com.Isoxya.Snap.PlugProc
     build-depends:
+        lib-common-ce,
+        --
         aeson,
         base64-bytestring,
         containers,
@@ -55,7 +84,6 @@ library lib-isx-plug-crawler-html
         unix,
         unordered-containers,
     hs-source-dirs:
-        lib/common-ce/src
         src
 --------------------------------------------------------------------------------
 executable isx-plug-crawler-html
@@ -64,6 +92,7 @@ executable isx-plug-crawler-html
     other-modules:
         Paths_isx_plug_crawler_html
     build-depends:
+        lib-common-ce,
         lib-isx-plug-crawler-html,
         --
         lens,
@@ -73,14 +102,14 @@ executable isx-plug-crawler-html
     ghc-options:
         -threaded
 --------------------------------------------------------------------------------
-library common-ce-test
+library lib-common-ce-test
     import:             common-properties
     exposed-modules:
         TPX.Com.Snap.Test
     other-modules:
         TPX.Com.Snap.TestUtils
     build-depends:
-        lib-isx-plug-crawler-html,
+        lib-common-ce,
         --
         aeson,
         base64-bytestring,
@@ -114,7 +143,8 @@ test-suite test-isx-plug-crawler-html
         ISX.Plug.CrawlerHTML.Zone.ApexSpec
         ISX.Plug.CrawlerHTML.Zone.DataSpec
     build-depends:
-        common-ce-test,
+        lib-common-ce,
+        lib-common-ce-test,
         lib-isx-plug-crawler-html,
         --
         containers,
