@@ -24,23 +24,17 @@ common common-properties
 library lib-common-ce
     import:             common-properties
     exposed-modules:
-        --TPX.Com.Cursor
-        --TPX.Com.Isoxya.PlugProc
-        --TPX.Com.Isoxya.PlugStrm
-        --TPX.Com.Net
-        --TPX.Com.Snap.CoreUtils
-        --TPX.Com.URI
+        TPX.Com.Isoxya.PlugProc
+        TPX.Com.Isoxya.Snap.PlugProc
+        TPX.Com.Snap.CoreUtils
+        TPX.Com.URI
+    other-modules:
+        TPX.Com.Cursor
     build-depends:
         aeson,
         base64-bytestring,
         bytestring,
-        conduit,
-        conduit-extra,
-        http-conduit,
-        http-types,
         network-uri,
-        regex-compat,
-        resourcet,
         safe,
         snap-core,
         snap-extras,
@@ -54,11 +48,11 @@ library lib-common-ce
 library lib-isx-plug-crawler-html
     import:             common-properties
     exposed-modules:
+        ISX.Plug.CrawlerHTML
+        ISX.Plug.CrawlerHTML.Core
     other-modules:
         Paths_isx_plug_crawler_html
         --
-        ISX.Plug.CrawlerHTML
-        ISX.Plug.CrawlerHTML.Core
         ISX.Plug.CrawlerHTML.Init
         ISX.Plug.CrawlerHTML.Parser
         ISX.Plug.CrawlerHTML.Resource
@@ -69,7 +63,6 @@ library lib-isx-plug-crawler-html
         lib-common-ce,
         --
         aeson,
-        base64-bytestring,
         containers,
         HandsomeSoup,
         hxt,
@@ -78,11 +71,8 @@ library lib-isx-plug-crawler-html
         snap,
         snap-core,
         snap-extras,
-        snap-server,
         text,
         time,
-        unix,
-        unordered-containers,
     hs-source-dirs:
         src
 --------------------------------------------------------------------------------
