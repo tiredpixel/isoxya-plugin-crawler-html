@@ -13,10 +13,9 @@ import qualified ISX.Plug.CrawlerHTML.Zone.Data as ZD
 
 
 initCrawlerHTML :: SnapletInit b CrawlerHTML
-initCrawlerHTML =
-    makeSnaplet "crawlerHTML" "Isoxya plugin: Crawler HTML" Nothing $ do
-        addRoutes routesCrawlerHTML
-        return CrawlerHTML
+initCrawlerHTML = makeSnaplet "CrawlerHTML" "" Nothing $ do
+    addRoutes routesCrawlerHTML
+    return CrawlerHTML
 
 routesCrawlerHTML :: [(ByteString, Handler b CrawlerHTML ())]
 routesCrawlerHTML = [

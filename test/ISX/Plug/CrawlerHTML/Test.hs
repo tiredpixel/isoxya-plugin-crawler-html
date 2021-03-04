@@ -56,6 +56,6 @@ fxExt url = if T.takeEnd 1 url == "/"
     else url
 
 initCrawlerHTMLTest :: SnapletInit b CrawlerHTML
-initCrawlerHTMLTest = makeSnaplet "crawlerHTMLTest" "Isoxya plugin: Crawler HTML Test" Nothing $ do
+initCrawlerHTMLTest = makeSnaplet "CrawlerHTML" "" Nothing $ do
     addRoutes routesCrawlerHTML
     return CrawlerHTML

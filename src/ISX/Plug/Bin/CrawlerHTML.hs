@@ -26,6 +26,6 @@ main = do
 
 
 initApp :: SnapletInit App App
-initApp = makeSnaplet "app" "Isoxya plugin: Crawler HTML" Nothing $ do
+initApp = makeSnaplet "App" "" Nothing $ do
     crawlerHTML' <- nestSnaplet "" crawlerHTML initCrawlerHTML
     return $ App crawlerHTML'
