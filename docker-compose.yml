@@ -1,10 +1,10 @@
 version: "2.4"
 services:
+  #-----------------------------------------------------------------------------
   plug_crawler_html:
     image: docker.package.tiredpixel.com/isoxya/isoxya-plugin-crawler-html-build:head
     init: true
     volumes:
-      - ./dist:/home/x/repo/dist
       - ./lib:/home/x/repo/lib
       - ./src:/home/x/repo/src
       - ./test:/home/x/repo/test
@@ -15,6 +15,7 @@ services:
         aliases:
           - crawler-html.plugin.dev.isoxya.com
     restart: on-failure
+  #-----------------------------------------------------------------------------
 networks:
   plug:
     external: true
