@@ -26,11 +26,6 @@ Since Isoxya supports both processor and streamer plugins using the Isoxya inter
   `X-Robots-Tag: nofollow`
 
 
-## Blessing
-
-May you find peace, and help others to do likewise.
-
-
 ## Contact
 
 [tiredpixel.com](https://www.tiredpixel.com/) · [tp@tiredpixel.com](mailto:tp@tiredpixel.com)
