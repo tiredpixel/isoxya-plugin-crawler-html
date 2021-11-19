@@ -1,7 +1,7 @@
 cabal-version:          3.0
-name:                   isx-plug-crawler-html
+name:                   isoxya-plugin-crawler-html
 version:                0.0.0
-synopsis:               Isoxya plugin: Crawler HTML
+synopsis:               Isoxya Crawler HTML plugin
 license:                BSD-3-Clause
 author:                 Nic Williams <tp@tiredpixel.com>
 maintainer:             Nic Williams <tp@tiredpixel.com>
@@ -21,16 +21,16 @@ common common-properties
         -Wall
         -ddump-minimal-imports
 --------------------------------------------------------------------------------
-library lib-common-ce
+library lib-common
     import:             common-properties
     exposed-modules:
-        TPX.Com.Isoxya.PlugProc
-        TPX.Com.Isoxya.Snap.PlugProc
-        TPX.Com.Snap.CoreUtils
-        TPX.Com.Snap.Main
-        TPX.Com.URI
+        TiredPixel.Common.Isoxya.PlugProc
+        TiredPixel.Common.Isoxya.Snap.PlugProc
+        TiredPixel.Common.Snap.CoreUtils
+        TiredPixel.Common.Snap.Main
+        TiredPixel.Common.URI
     other-modules:
-        TPX.Com.Cursor
+        TiredPixel.Common.Cursor
     build-depends:
         aeson,
         base64-bytestring,
@@ -46,24 +46,24 @@ library lib-common-ce
         unix,
         unordered-containers,
     hs-source-dirs:
-        lib/common-ce/src
+        lib/common/src
 --------------------------------------------------------------------------------
-library lib-isx-plug-crawler-html
+library lib-isoxya-plugin-crawler-html
     import:             common-properties
     exposed-modules:
-        ISX.Plug.CrawlerHTML
-        ISX.Plug.CrawlerHTML.Core
+        Isoxya.Plugin.CrawlerHTML
+        Isoxya.Plugin.CrawlerHTML.Core
     other-modules:
-        Paths_isx_plug_crawler_html
+        Paths_isoxya_plugin_crawler_html
         --
-        ISX.Plug.CrawlerHTML.Init
-        ISX.Plug.CrawlerHTML.Parser
-        ISX.Plug.CrawlerHTML.Resource
-        ISX.Plug.CrawlerHTML.Types
-        ISX.Plug.CrawlerHTML.Zone.Apex
-        ISX.Plug.CrawlerHTML.Zone.Data
+        Isoxya.Plugin.CrawlerHTML.Init
+        Isoxya.Plugin.CrawlerHTML.Parser
+        Isoxya.Plugin.CrawlerHTML.Resource
+        Isoxya.Plugin.CrawlerHTML.Types
+        Isoxya.Plugin.CrawlerHTML.Zone.Apex
+        Isoxya.Plugin.CrawlerHTML.Zone.Data
     build-depends:
-        lib-common-ce,
+        lib-common,
         --
         aeson,
         containers,
@@ -79,30 +79,28 @@ library lib-isx-plug-crawler-html
     hs-source-dirs:
         src
 --------------------------------------------------------------------------------
-executable isx-plug-crawler-html
+executable isoxya-plugin-crawler-html
     import:             common-properties
     main-is:            CrawlerHTML.hs
     other-modules:
-        Paths_isx_plug_crawler_html
+        Paths_isoxya_plugin_crawler_html
     build-depends:
-        lib-common-ce,
-        lib-isx-plug-crawler-html,
+        lib-common,
+        lib-isoxya-plugin-crawler-html,
         --
         lens,
         snap,
     hs-source-dirs:
-        src/ISX/Plug/Bin
-    ghc-options:
-        -threaded
+        src/Isoxya/Plugin/Bin
 --------------------------------------------------------------------------------
-library lib-common-ce-test
+library lib-common-test
     import:             common-properties
     exposed-modules:
-        TPX.Com.Snap.Test
+        TiredPixel.Common.Snap.Test
     other-modules:
-        TPX.Com.Snap.TestUtils
+        TiredPixel.Common.Snap.TestUtils
     build-depends:
-        lib-common-ce,
+        lib-common,
         --
         aeson,
         base64-bytestring,
@@ -124,21 +122,21 @@ library lib-common-ce-test
         unordered-containers,
         vector,
     hs-source-dirs:
-        lib/common-ce/test
+        lib/common/test
 --------------------------------------------------------------------------------
-test-suite test-isx-plug-crawler-html
+test-suite test-isoxya-plugin-crawler-html
     import:             common-properties
     type:               exitcode-stdio-1.0
     main-is:            Spec.hs
     other-modules:
-        ISX.Plug.CrawlerHTML.ParserSpec
-        ISX.Plug.CrawlerHTML.Test
-        ISX.Plug.CrawlerHTML.Zone.ApexSpec
-        ISX.Plug.CrawlerHTML.Zone.DataSpec
+        Isoxya.Plugin.CrawlerHTML.ParserSpec
+        Isoxya.Plugin.CrawlerHTML.Test
+        Isoxya.Plugin.CrawlerHTML.Zone.ApexSpec
+        Isoxya.Plugin.CrawlerHTML.Zone.DataSpec
     build-depends:
-        lib-common-ce,
-        lib-common-ce-test,
-        lib-isx-plug-crawler-html,
+        lib-common,
+        lib-common-test,
+        lib-isoxya-plugin-crawler-html,
         --
         containers,
         hspec                           ==  2.*,
@@ -150,6 +148,3 @@ test-suite test-isx-plug-crawler-html
         test
     build-tool-depends:
         hspec-discover:hspec-discover   ==  2.*
-    ghc-options:
-        -threaded
---------------------------------------------------------------------------------
