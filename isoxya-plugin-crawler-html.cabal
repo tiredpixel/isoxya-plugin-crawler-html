@@ -24,8 +24,8 @@ common common-properties
 library lib-common
     import:             common-properties
     exposed-modules:
-        TiredPixel.Common.Isoxya.PlugProc
-        TiredPixel.Common.Isoxya.Snap.PlugProc
+        TiredPixel.Common.Isoxya.Processor
+        TiredPixel.Common.Isoxya.Snap.Processor
         TiredPixel.Common.Snap.CoreUtils
         TiredPixel.Common.Snap.Main
         TiredPixel.Common.URI
@@ -56,12 +56,12 @@ library lib-isoxya-plugin-crawler-html
     other-modules:
         Paths_isoxya_plugin_crawler_html
         --
+        Isoxya.Plugin.CrawlerHTML.Endpoint.Apex
+        Isoxya.Plugin.CrawlerHTML.Endpoint.Data
         Isoxya.Plugin.CrawlerHTML.Init
         Isoxya.Plugin.CrawlerHTML.Parser
         Isoxya.Plugin.CrawlerHTML.Resource
         Isoxya.Plugin.CrawlerHTML.Types
-        Isoxya.Plugin.CrawlerHTML.Zone.Apex
-        Isoxya.Plugin.CrawlerHTML.Zone.Data
     build-depends:
         lib-common,
         --
@@ -129,10 +129,10 @@ test-suite test-isoxya-plugin-crawler-html
     type:               exitcode-stdio-1.0
     main-is:            Spec.hs
     other-modules:
+        Isoxya.Plugin.CrawlerHTML.Endpoint.ApexSpec
+        Isoxya.Plugin.CrawlerHTML.Endpoint.DataSpec
         Isoxya.Plugin.CrawlerHTML.ParserSpec
         Isoxya.Plugin.CrawlerHTML.Test
-        Isoxya.Plugin.CrawlerHTML.Zone.ApexSpec
-        Isoxya.Plugin.CrawlerHTML.Zone.DataSpec
     build-depends:
         lib-common,
         lib-common-test,

@@ -1,9 +1,9 @@
-module ISX.Plug.CrawlerHTML.ParserSpec (spec) where
+module Isoxya.Plugin.CrawlerHTML.ParserSpec (spec) where
 
 
-import           ISX.Plug.CrawlerHTML.Test
-import           TPX.Com.Isoxya.PlugProc
-import qualified Data.Map.Strict           as M
+import           Isoxya.Plugin.CrawlerHTML.Test
+import           TiredPixel.Common.Isoxya.Processor
+import qualified Data.Map.Strict                    as M
 
 
 spec :: Spec
@@ -95,10 +95,10 @@ spec = snapCrawlerHTML $ do
             a `shouldBeSet` e
 
 
-load :: (MonadFail m, MonadIO m) => Text -> Integer -> PlugProcIHeader ->
-    m (Set PlugProcOURL, Set PlugProcOURL)
+load :: (MonadFail m, MonadIO m) => Text -> Integer -> ProcessorIHeader ->
+    m (Set ProcessorOURL, Set ProcessorOURL)
 load url status header = do
-    i <- genPlugProcI url status header
+    i <- genProcessorI url status header
     let linksA = parse i
     t <- readFileText $ fixtureLink url
     let Just linksE = decode $ encodeUtf8 t
