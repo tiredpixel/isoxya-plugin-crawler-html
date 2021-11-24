@@ -28,7 +28,7 @@ COPY --chown=x:x [ \
     "./"]
 
 RUN cabal update && \
-    cabal install --only-dependencies
+    cabal build --only-dependencies --enable-tests
 #-------------------------------------------------------------------------------
 ENV PATH=${HOME}/.cabal/bin:$PATH \
     LANG=C.UTF-8

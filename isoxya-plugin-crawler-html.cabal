@@ -17,7 +17,7 @@ common common-properties
     default-extensions:
         OverloadedStrings
     ghc-options:
-        -Weverything
+        -Wall
         -Werror
 --------------------------------------------------------------------------------
 library lib-common
