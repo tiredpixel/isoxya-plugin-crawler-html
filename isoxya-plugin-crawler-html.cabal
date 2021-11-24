@@ -5,11 +5,10 @@ synopsis:               Isoxya Crawler HTML plugin
 license:                BSD-3-Clause
 author:                 Nic Williams <tp@tiredpixel.com>
 maintainer:             Nic Williams <tp@tiredpixel.com>
-build-type:             Simple
 --------------------------------------------------------------------------------
 common common-properties
     build-depends:
-        base                            ==  4.13.*,
+        base                            ^>= 4.14.3.0,
         relude
     mixins:
         base                            hiding (Prelude),
@@ -18,8 +17,8 @@ common common-properties
     default-extensions:
         OverloadedStrings
     ghc-options:
-        -Wall
-        -ddump-minimal-imports
+        -Weverything
+        -Werror
 --------------------------------------------------------------------------------
 library lib-common
     import:             common-properties
@@ -110,7 +109,7 @@ library lib-common-test
         filepath,
         hspec                           ==  2.*,
         hspec-core,
-        hspec-snap,
+        --hspec-snap,
         http-link-header,
         lens,
         lens-aeson,
