@@ -78,22 +78,20 @@ library lib-isoxya-plugin-crawler-html
         Isoxya.Plugin.CrawlerHTML
         Isoxya.Plugin.CrawlerHTML.Core
     other-modules:
-        Paths_isoxya_plugin_crawler_html
-        --
         Isoxya.Plugin.CrawlerHTML.Endpoint.Apex
         Isoxya.Plugin.CrawlerHTML.Endpoint.Data
         Isoxya.Plugin.CrawlerHTML.Init
         Isoxya.Plugin.CrawlerHTML.Parser
         Isoxya.Plugin.CrawlerHTML.Resource
         Isoxya.Plugin.CrawlerHTML.Types
+        Paths_isoxya_plugin_crawler_html
     build-depends:
-        lib-common,
-        --
         aeson,
         containers,
         HandsomeSoup,
         hxt,
         lens,
+        lib-common,
         network-uri,
         snap,
         snap-core,
@@ -109,10 +107,9 @@ executable isoxya-plugin-crawler-html
     other-modules:
         Paths_isoxya_plugin_crawler_html
     build-depends:
+        lens,
         lib-common,
         lib-isoxya-plugin-crawler-html,
-        --
-        lens,
         snap,
     hs-source-dirs:
         src/Isoxya/Plugin/Bin
@@ -124,8 +121,6 @@ library lib-common-test
     other-modules:
         TiredPixel.Common.Snap.TestUtils
     build-depends:
-        lib-common,
-        --
         aeson,
         base64-bytestring,
         bytestring,
@@ -138,6 +133,7 @@ library lib-common-test
         http-link-header,
         lens,
         lens-aeson,
+        lib-common,
         mtl,
         network-uri,
         process,
@@ -158,12 +154,11 @@ test-suite test-isoxya-plugin-crawler-html
         Isoxya.Plugin.CrawlerHTML.ParserSpec
         Isoxya.Plugin.CrawlerHTML.Test
     build-depends:
+        containers,
+        hspec                           ==  2.*,
         lib-common,
         lib-common-test,
         lib-isoxya-plugin-crawler-html,
-        --
-        containers,
-        hspec                           ==  2.*,
         network-uri,
         text,
     default-extensions:
