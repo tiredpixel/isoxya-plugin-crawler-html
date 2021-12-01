@@ -2,7 +2,7 @@
 {-# OPTIONS_GHC -Wno-unused-top-binds #-}
 
 
-module Isoxya.Plugin.CrawlerHTML.Types (
+module Isoxya.Plugin.CrawlerHTML.Type (
     CrawlerHTML(..),
     ) where
 

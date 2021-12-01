@@ -4,10 +4,10 @@ module Isoxya.Plugin.CrawlerHTML.Init (
     ) where
 
 
-import           Isoxya.Plugin.CrawlerHTML.Types
+import           Isoxya.Plugin.CrawlerHTML.Type
 import           Snap.Core
 import           Snap.Snaplet
-import           TiredPixel.Common.Snap.CoreUtils
+import           TiredPixel.Common.Snap.CoreUtil
 import qualified Isoxya.Plugin.CrawlerHTML.Endpoint.Apex as EA
 import qualified Isoxya.Plugin.CrawlerHTML.Endpoint.Data as ED
 

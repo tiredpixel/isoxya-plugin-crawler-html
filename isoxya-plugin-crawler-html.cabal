@@ -50,7 +50,7 @@ library lib-common
     exposed-modules:
         TiredPixel.Common.Isoxya.Processor
         TiredPixel.Common.Isoxya.Snap.Processor
-        TiredPixel.Common.Snap.CoreUtils
+        TiredPixel.Common.Snap.CoreUtil
         TiredPixel.Common.Snap.Main
         TiredPixel.Common.URI
     other-modules:
@@ -83,7 +83,7 @@ library lib-isoxya-plugin-crawler-html
         Isoxya.Plugin.CrawlerHTML.Init
         Isoxya.Plugin.CrawlerHTML.Parser
         Isoxya.Plugin.CrawlerHTML.Resource
-        Isoxya.Plugin.CrawlerHTML.Types
+        Isoxya.Plugin.CrawlerHTML.Type
         Paths_isoxya_plugin_crawler_html
     build-depends:
         aeson,
@@ -119,7 +119,7 @@ library lib-common-test
     exposed-modules:
         TiredPixel.Common.Snap.Test
     other-modules:
-        TiredPixel.Common.Snap.TestUtils
+        TiredPixel.Common.Snap.TestUtil
     build-depends:
         aeson,
         base64-bytestring,
