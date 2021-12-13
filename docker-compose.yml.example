@@ -13,5 +13,6 @@ services:
         aliases:
           - isoxya-plugin-crawler-html.localhost
     restart: on-failure
+    env_file: .env
 networks:
   plugin: {}

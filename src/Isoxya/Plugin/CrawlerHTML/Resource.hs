@@ -8,6 +8,7 @@ module Isoxya.Plugin.CrawlerHTML.Resource (
 
 
 import Data.Aeson
+import Data.Fixed                         (Pico)
 import Data.Time.Clock
 import TiredPixel.Common.Isoxya.Processor
 
@@ -22,7 +23,7 @@ instance ToJSON Apex where
         "version" .= apexVersion]
 
 data Data = Data {
-    dataDuration :: Maybe Integer,
+    dataDuration :: Maybe Pico,
     dataError    :: Maybe Text,
     dataHeader   :: ProcessorIHeader,
     dataMethod   :: Text,
