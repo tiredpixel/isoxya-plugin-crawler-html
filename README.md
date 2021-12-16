@@ -27,6 +27,27 @@ https://github.com/isoxya/isoxya-plugin-crawler-html
   `X-Robots-Tag: nofollow`
 
 
+## Installation
+
+Choose a stream: `stable` (recommended), `testing`, or `unstable`:
+
+```sh
+cd misc/streams/stable/
+```
+
+Copy environment variables:
+
+```sh
+cp .env.example .env
+```
+
+Boot the stack:
+
+```sh
+docker-compose up
+```
+
+
 ## Contact
 
 [tp@tiredpixel.com](mailto:tp@tiredpixel.com) · [www.tiredpixel.com](https://www.tiredpixel.com/) · [www.isoxya.com](https://www.isoxya.com/)
