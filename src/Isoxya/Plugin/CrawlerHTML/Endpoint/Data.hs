@@ -10,7 +10,7 @@ import TiredPixel.Common.Isoxya.Snap.Processor ()
 
 create :: Handler b CrawlerHTML ()
 create = do
-    req_     <- getBoundedJSON' reqLim >>= validateJSON
+    req_ <- getBoundedJSON' reqLim >>= validateJSON
     Just req <- runValidate req_
     let dat = Data {
         dataDuration = processorIMetaDuration $ processorIMeta req,

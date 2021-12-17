@@ -12,5 +12,6 @@ import Paths_isoxya_plugin_crawler_html (version)
 apex :: Handler b CrawlerHTML ()
 apex = do
     t <- liftIO getCurrentTime
-    let v = toText $ showVersion version
-    writeJSON $ Apex t v
+    writeJSON $ Apex t ver
+    where
+        ver = toText $ showVersion version
