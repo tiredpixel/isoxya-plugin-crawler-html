@@ -1,6 +1,6 @@
-# Isoxya Crawler HTML plugin
+# Isoxya plugin Crawler HTML
 
-Isoxya Crawler HTML plugin provides a core run loop for the crawling engine, parsing each page as static HTML, and extracting request metadata and outbound URLs. It is a plugin for [Isoxya](https://www.isoxya.com/) web crawler.
+Isoxya plugin Crawler HTML provides a core run loop for the crawling engine, parsing each page as static HTML, and extracting request metadata and outbound URLs. It is a plugin for [Isoxya](https://www.isoxya.com/) web crawler.
 
 https://hub.docker.com/r/isoxya/isoxya-plugin-crawler-html  
 https://github.com/isoxya/isoxya-plugin-crawler-html  
@@ -33,12 +33,6 @@ Choose a stream: `stable` (recommended), `testing`, or `unstable`:
 
 ```sh
 cd misc/streams/stable/
-```
-
-Copy environment variables:
-
-```sh
-cp .env.example .env
 ```
 
 Boot the stack:
