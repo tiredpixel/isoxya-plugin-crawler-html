@@ -1,22 +1,22 @@
-module ISX.Plug.CrawlerHTML.Parser (parse) where
+module Isoxya.Plugin.CrawlerHTML.Parser (parse) where
 
 
 import           Network.URI
-import           TPX.Com.Isoxya.PlugProc
-import           TPX.Com.URI
 import           Text.HandsomeSoup
 import           Text.XML.HXT.Core
-import qualified Data.Map                as M
-import qualified Data.Set                as S
-import qualified Data.Text               as T
+import           TiredPixel.Common.Isoxya.Processor
+import           TiredPixel.Common.URI
+import qualified Data.Map                           as M
+import qualified Data.Set                           as S
+import qualified Data.Text                          as T
 
 
-parse :: PlugProcI -> S.Set PlugProcOURL
+parse :: ProcessorI -> S.Set ProcessorOURL
 parse rx = S.fromList $ normalizeLinks m base links
     where
-        m = plugProcIMeta rx
-        h = plugProcIHeader rx
-        b = plugProcIBody rx
+        m = processorIMeta rx
+        h = processorIHeader rx
+        b = processorIBody rx
         body = fromRight "" $ decodeUtf8' b
         doc p = runLA (hread >>> p) $ toString body
         base = URIAbsolute <$> (parseAbsoluteURI =<< listToMaybe (
@@ -30,7 +30,7 @@ parse rx = S.fromList $ normalizeLinks m base links
             | otherwise = toText <$> pageLinks
 
 
-isHeaderNoFollow :: PlugProcIHeader -> Bool
+isHeaderNoFollow :: ProcessorIHeader -> Bool
 isHeaderNoFollow h = "nofollow" `S.member` robots
     where
         robots = case M.lookup "X-Robots-Tag" h of
@@ -40,8 +40,8 @@ isHeaderNoFollow h = "nofollow" `S.member` robots
             ("", v) -> T.splitOn "," v
             _ -> []
 
-isHeaderRedirect :: PlugProcIMeta -> Bool
-isHeaderRedirect m = case plugProcIMetaStatus m of
+isHeaderRedirect :: ProcessorIMeta -> Bool
+isHeaderRedirect m = case processorIMetaStatus m of
     Just s  -> s `S.member` statusRedirects
     Nothing -> False
 
@@ -52,12 +52,13 @@ isMetaNoFollow metaRobots = "nofollow" `S.member` robots
             Just v  -> S.fromList $ T.strip <$> T.splitOn "," v
             Nothing -> S.empty
 
-normalizeLinks :: PlugProcIMeta -> Maybe URIAbsolute -> [Text] -> [PlugProcOURL]
+normalizeLinks :: ProcessorIMeta -> Maybe URIAbsolute -> [Text] ->
+    [ProcessorOURL]
 normalizeLinks m base es =
     URIReference . flip relativeTo baseURL <$>
         mapMaybe (parseURIReference . toString) es
     where
-        baseURL = unURIAbsolute $ fromMaybe (plugProcIMetaURL m) base
+        baseURL = unURIAbsolute $ fromMaybe (processorIMetaURL m) base
 
 statusRedirects :: S.Set Integer
 statusRedirects = S.fromList [301, 302, 303, 307, 308]

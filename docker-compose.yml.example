@@ -1,22 +1,17 @@
 version: "2.4"
 services:
-  #-----------------------------------------------------------------------------
-  plug:
-    image: docker.repo.ci.tp-prd.tiredpixel.com/isoxya.build/isoxya-plugin-crawler-html:unstable
+  plugin_crawler_html:
+    image: docker.io/tiredpixel/isoxya-plugin-crawler-html.build:unstable
     init: true
     volumes:
+      - ./isoxya-plugin-crawler-html.cabal:/home/x/repo/isoxya-plugin-crawler-html.cabal
       - ./lib:/home/x/repo/lib
       - ./src:/home/x/repo/src
       - ./test:/home/x/repo/test
-      #
-      - ./isx-plug-crawler-html.cabal:/home/x/repo/isx-plug-crawler-html.cabal
     networks:
-      plug:
+      processor:
         aliases:
-          - crawler-html.plugin.dev.isoxya.com
+          - isoxya-plugin-crawler-html.localhost
     restart: on-failure
-  #-----------------------------------------------------------------------------
 networks:
-  plug:
-    external: true
-    name: isoxya_plug
+  processor: {}

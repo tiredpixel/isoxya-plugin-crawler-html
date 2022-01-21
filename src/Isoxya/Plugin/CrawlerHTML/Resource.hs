@@ -1,37 +1,38 @@
 {-# LANGUAGE RecordWildCards #-}
 
 
-module ISX.Plug.CrawlerHTML.Resource (
+module Isoxya.Plugin.CrawlerHTML.Resource (
     Apex(..),
     Data(..),
     ) where
 
 
 import Data.Aeson
+import Data.Fixed                         (Pico)
 import Data.Time.Clock
-import TPX.Com.Isoxya.PlugProc
+import TiredPixel.Common.Isoxya.Processor
 
 
 data Apex = Apex {
-    apexTNow    :: UTCTime,
+    apexTime    :: UTCTime,
     apexVersion :: Text
     } deriving (Show)
 instance ToJSON Apex where
     toJSON Apex{..} = object [
-        "t_now"   .= apexTNow,
+        "time"    .= apexTime,
         "version" .= apexVersion]
 
 data Data = Data {
-    dataHeader   :: PlugProcIHeader,
+    dataDuration :: Maybe Pico,
+    dataError    :: Maybe Text,
+    dataHeader   :: ProcessorIHeader,
     dataMethod   :: Text,
-    dataStatus   :: Maybe Integer,
-    dataDuration :: Maybe Rational,
-    dataErr      :: Maybe Text
+    dataStatus   :: Maybe Integer
     } deriving (Show)
 instance ToJSON Data where
     toJSON Data{..} = object [
+        "duration" .= dataDuration,
+        "error"    .= dataError,
         "header"   .= dataHeader,
         "method"   .= dataMethod,
-        "status"   .= dataStatus,
-        "duration" .= dataDuration,
-        "err"      .= dataErr]
+        "status"   .= dataStatus]
