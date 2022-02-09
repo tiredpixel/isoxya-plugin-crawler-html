@@ -135,10 +135,13 @@ test-suite test-isoxya-plugin-crawler-html
         lib-common-test,
         lib-isoxya-plugin-crawler-html,
         network-uri,
+        stylish-haskell,
         text,
     default-extensions:
         NoImplicitPrelude
     hs-source-dirs:
         test
+    ghc-options:
+        -Wno-error=unused-packages
     build-tool-depends:
         hspec-discover:hspec-discover   ==  2.*
