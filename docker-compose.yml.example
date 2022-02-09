@@ -4,6 +4,7 @@ services:
     image: docker.io/tiredpixel/isoxya-plugin-crawler-html.build:unstable
     init: true
     volumes:
+      - ./.hlint.yaml:/home/x/repo/.hlint.yaml
       - ./isoxya-plugin-crawler-html.cabal:/home/x/repo/isoxya-plugin-crawler-html.cabal
       - ./lib:/home/x/repo/lib
       - ./src:/home/x/repo/src
