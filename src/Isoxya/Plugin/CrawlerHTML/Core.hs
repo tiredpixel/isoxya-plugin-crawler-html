@@ -10,11 +10,11 @@ module Isoxya.Plugin.CrawlerHTML.Core (
     ) where
 
 
-import Data.Aeson
-import Isoxya.Plugin.CrawlerHTML.Parser
-import Isoxya.Plugin.CrawlerHTML.Resource
-import Isoxya.Plugin.CrawlerHTML.Type
-import Snap.Core                          hiding (pass)
-import Snap.Extras.JSON
-import Snap.Snaplet
-import TiredPixel.Common.Snap.CoreUtil
+import           Data.Aeson
+import           Isoxya.Plugin.CrawlerHTML.Parser
+import           Isoxya.Plugin.CrawlerHTML.Resource
+import           Isoxya.Plugin.CrawlerHTML.Type
+import           Snap.Core                          hiding (pass)
+import           Snap.Extras.JSON
+import           Snap.Snaplet
+import           TiredPixel.Common.Snap.CoreUtil

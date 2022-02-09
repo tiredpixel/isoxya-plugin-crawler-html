@@ -1,7 +1,7 @@
 module Isoxya.Plugin.CrawlerHTML.Endpoint.DataSpec (spec) where
 
 
-import Isoxya.Plugin.CrawlerHTML.Test
+import           Isoxya.Plugin.CrawlerHTML.Test
 
 
 spec :: Spec
@@ -14,7 +14,7 @@ spec = snapCrawlerHTML $
             b <- getResponseBody res
             b ^. key "data" . key "header" . _Object `shouldBe` emptyO
             test res Nothing []
-        
+
         it "header => 200" $ do
             let p = mergeObject pC $ object [
                     ("header", object [
@@ -26,7 +26,7 @@ spec = snapCrawlerHTML $
             b ^. key "data" . key "header" . key "Content-Type" . _String `shouldBe` "application/pdf"
             b ^. key "data" . key "header" . _Object `shouldMeasure` 1
             test res Nothing []
-        
+
         it "status => 200" $ do
             let p = mergeObject pC $ object [
                     ("meta", object [
@@ -37,7 +37,7 @@ spec = snapCrawlerHTML $
             b <- getResponseBody res
             b ^. key "data" . key "header" . _Object `shouldBe` emptyO
             test res (Just 418) []
-        
+
         it "redirect => 200" $ do
             let p = mergeObject pC $ object [
                     ("meta", object [

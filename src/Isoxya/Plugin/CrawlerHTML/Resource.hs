@@ -7,28 +7,30 @@ module Isoxya.Plugin.CrawlerHTML.Resource (
     ) where
 
 
-import Data.Aeson
-import Data.Fixed                         (Pico)
-import Data.Time.Clock
-import TiredPixel.Common.Isoxya.Processor
+import           Data.Aeson
+import           Data.Fixed                         (Pico)
+import           Data.Time.Clock
+import           TiredPixel.Common.Isoxya.Processor
 
 
-data Apex = Apex {
-    apexTime    :: UTCTime,
-    apexVersion :: Text
-    } deriving (Show)
+data Apex = Apex
+              { apexTime    :: UTCTime
+              , apexVersion :: Text
+              }
+  deriving (Show)
 instance ToJSON Apex where
     toJSON Apex{..} = object [
         "time"    .= apexTime,
         "version" .= apexVersion]
 
-data Data = Data {
-    dataDuration :: Maybe Pico,
-    dataError    :: Maybe Text,
-    dataHeader   :: ProcessorIHeader,
-    dataMethod   :: Text,
-    dataStatus   :: Maybe Integer
-    } deriving (Show)
+data Data = Data
+              { dataDuration :: Maybe Pico
+              , dataError    :: Maybe Text
+              , dataHeader   :: ProcessorIHeader
+              , dataMethod   :: Text
+              , dataStatus   :: Maybe Integer
+              }
+  deriving (Show)
 instance ToJSON Data where
     toJSON Data{..} = object [
         "duration" .= dataDuration,

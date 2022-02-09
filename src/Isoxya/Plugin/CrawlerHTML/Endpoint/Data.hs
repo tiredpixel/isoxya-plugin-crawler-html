@@ -3,9 +3,9 @@ module Isoxya.Plugin.CrawlerHTML.Endpoint.Data (
     ) where
 
 
-import Isoxya.Plugin.CrawlerHTML.Core
-import TiredPixel.Common.Isoxya.Processor
-import TiredPixel.Common.Isoxya.Snap.Processor ()
+import           Isoxya.Plugin.CrawlerHTML.Core
+import           TiredPixel.Common.Isoxya.Processor
+import           TiredPixel.Common.Isoxya.Snap.Processor ()
 
 
 create :: Handler b CrawlerHTML ()

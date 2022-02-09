@@ -10,13 +10,15 @@ module Isoxya.Plugin.CrawlerHTML.Test (
     ) where
 
 
+import qualified Data.Text                          as T
 import           Isoxya.Plugin.CrawlerHTML
-import           Isoxya.Plugin.CrawlerHTML.Core     hiding (addHeader, setContentType, setHeader, (.=))
+import           Isoxya.Plugin.CrawlerHTML.Core     hiding (addHeader,
+                                                     setContentType, setHeader,
+                                                     (.=))
 import           Network.URI
 import           TiredPixel.Common.Isoxya.Processor
 import           TiredPixel.Common.Snap.Test
 import           TiredPixel.Common.URI
-import qualified Data.Text                          as T
 
 
 fixtureLink :: Text -> FilePath

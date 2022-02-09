@@ -7,9 +7,9 @@ module Isoxya.Plugin.CrawlerHTML.Type (
     ) where
 
 
-import Control.Lens (makeLenses)
+import           Control.Lens (makeLenses)
 
 
-data CrawlerHTML = CrawlerHTML {}
+data CrawlerHTML = CrawlerHTML
 
 makeLenses ''CrawlerHTML

@@ -1,14 +1,14 @@
 module Isoxya.Plugin.CrawlerHTML.Parser (parse) where
 
 
+import qualified Data.Map                           as M
+import qualified Data.Set                           as S
+import qualified Data.Text                          as T
 import           Network.URI
 import           Text.HandsomeSoup
 import           Text.XML.HXT.Core
 import           TiredPixel.Common.Isoxya.Processor
 import           TiredPixel.Common.URI
-import qualified Data.Map                           as M
-import qualified Data.Set                           as S
-import qualified Data.Text                          as T
 
 
 parse :: ProcessorI -> S.Set ProcessorOURL
@@ -38,7 +38,7 @@ isHeaderNoFollow h = "nofollow" `S.member` robots
             Nothing -> S.empty
         splitTag t = case T.breakOnEnd ":" t of
             ("", v) -> T.splitOn "," v
-            _ -> []
+            _       -> []
 
 isHeaderRedirect :: ProcessorIMeta -> Bool
 isHeaderRedirect m = case processorIMetaStatus m of

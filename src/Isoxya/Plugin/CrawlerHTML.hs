@@ -4,5 +4,5 @@ module Isoxya.Plugin.CrawlerHTML (
     ) where
 
 
-import Isoxya.Plugin.CrawlerHTML.Init
-import Isoxya.Plugin.CrawlerHTML.Type
+import           Isoxya.Plugin.CrawlerHTML.Init
+import           Isoxya.Plugin.CrawlerHTML.Type

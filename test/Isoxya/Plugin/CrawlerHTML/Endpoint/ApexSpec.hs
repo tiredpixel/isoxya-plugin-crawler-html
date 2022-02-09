@@ -1,7 +1,7 @@
 module Isoxya.Plugin.CrawlerHTML.Endpoint.ApexSpec (spec) where
 
 
-import Isoxya.Plugin.CrawlerHTML.Test
+import           Isoxya.Plugin.CrawlerHTML.Test
 
 
 spec :: Spec

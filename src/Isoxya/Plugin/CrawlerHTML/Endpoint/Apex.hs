@@ -3,10 +3,10 @@ module Isoxya.Plugin.CrawlerHTML.Endpoint.Apex (
     ) where
 
 
-import Data.Time.Clock
-import Data.Version                     (showVersion)
-import Isoxya.Plugin.CrawlerHTML.Core
-import Paths_isoxya_plugin_crawler_html (version)
+import           Data.Time.Clock
+import           Data.Version                     (showVersion)
+import           Isoxya.Plugin.CrawlerHTML.Core
+import           Paths_isoxya_plugin_crawler_html (version)
 
 
 apex :: Handler b CrawlerHTML ()
