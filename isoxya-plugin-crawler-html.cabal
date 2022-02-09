@@ -130,19 +130,17 @@ test-suite test-isoxya-plugin-crawler-html
         Isoxya.Plugin.CrawlerHTML.Test
     build-depends:
         containers,
-        hlint,
         hspec                           ==  2.*,
         lib-common,
         lib-common-test,
         lib-isoxya-plugin-crawler-html,
         network-uri,
-        stylish-haskell,
         text,
     default-extensions:
         NoImplicitPrelude
     hs-source-dirs:
         test
-    ghc-options:
-        -Wno-error=unused-packages
     build-tool-depends:
-        hspec-discover:hspec-discover   ==  2.*
+        hlint:hlint,
+        hspec-discover:hspec-discover   ==  2.*,
+        stylish-haskell:stylish-haskell,
