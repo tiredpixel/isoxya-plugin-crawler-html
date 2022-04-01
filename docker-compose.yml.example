@@ -1,11 +1,12 @@
+# vim: set ft=yaml:
 version: "2.4"
 services:
   plugin_crawler_html:
     image: docker.io/tiredpixel/isoxya-plugin-crawler-html.build:unstable
     init: true
     volumes:
-      - ./.hlint.yaml:/home/x/repo/.hlint.yaml
       - ./.stylish-haskell.yaml:/home/x/repo/.stylish-haskell.yaml
+      - ./bin:/home/x/repo/bin
       - ./isoxya-plugin-crawler-html.cabal:/home/x/repo/isoxya-plugin-crawler-html.cabal
       - ./lib:/home/x/repo/lib
       - ./src:/home/x/repo/src
