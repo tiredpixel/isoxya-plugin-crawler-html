@@ -1,7 +1,7 @@
 # vim: set ft=yaml:
 version: '2.4'
 services:
-  plugin_crawler_html:
+  plugin-crawler-html:
     build: .
     #image: docker.io/tiredpixel/isoxya-plugin-crawler-html.build:unstable
     init: true
