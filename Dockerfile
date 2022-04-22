@@ -7,12 +7,12 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 RUN useradd x -m && \
-    mkdir /home/x/plugin-crawler-html && \
+    mkdir /home/x/r && \
     chown -R x:x /home/x
 #-------------------------------------------------------------------------------
 USER x
 
-WORKDIR /home/x/plugin-crawler-html
+WORKDIR /home/x/r
 
 COPY --chown=x:x ["*.cabal", "cabal.project.freeze", "./"]
 
@@ -27,7 +27,7 @@ RUN VERSION=$(echo "$GIT_DESCRIBE" | sed 's/-/./') && \
     sed -i -E "s/(version: *)0.0.0/\1$VERSION/" ./*.cabal && \
     cabal install -O2
 #-------------------------------------------------------------------------------
-ENV PATH=/home/x/plugin-crawler-html/bin:/home/x/.cabal/bin:$PATH \
+ENV PATH=/home/x/r/bin:/home/x/.cabal/bin:$PATH \
     LANG=C.UTF-8
 
 CMD ["cabal", "run", "isoxya-plugin-crawler-html", "--", \
