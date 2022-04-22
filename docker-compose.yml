@@ -1,0 +1,17 @@
+version: '2.4'
+services:
+  plugin-crawler-html:
+    build:
+      context: .
+      target: builder
+    init: true
+    volumes:
+      - .:/home/x/plugin-crawler-html
+      - /home/x/plugin-crawler-html/dist-newstyle
+    networks:
+      processor:
+        aliases:
+          - isoxya-plugin-crawler-html.localhost
+    restart: on-failure
+networks:
+  processor: {}
