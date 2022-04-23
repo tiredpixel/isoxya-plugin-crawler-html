@@ -7,11 +7,13 @@ services:
     init: true
     volumes:
       - .:/home/x/r
-      - /home/x/r/dist-newstyle
+      - plugin-crawler-html_dist-newstyle:/home/x/r/dist-newstyle
     networks:
       processor:
         aliases:
           - isoxya-plugin-crawler-html.localhost
     restart: on-failure
+volumes:
+  plugin-crawler-html_dist-newstyle: {}
 networks:
   processor: {}

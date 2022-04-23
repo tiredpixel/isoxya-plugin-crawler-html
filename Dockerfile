@@ -3,7 +3,8 @@ FROM docker.io/library/haskell@sha256:aaa408ad7e7eff6cd76c39feae223db7ba3550b937
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         jq \
-        libpcre3-dev && \
+        libpcre3-dev \
+        && \
     rm -rf /var/lib/apt/lists/*
 
 RUN useradd x -m && \
@@ -14,7 +15,7 @@ USER x
 
 WORKDIR /home/x/r
 
-COPY --chown=x:x ["*.cabal", "cabal.project.freeze", "./"]
+COPY --chown=x:x *.cabal cabal.project.freeze ./
 
 RUN cabal update && \
     cabal build --only-dependencies --enable-tests
@@ -41,7 +42,8 @@ FROM docker.io/library/debian@sha256:ebe4b9831fb22dfa778de4ffcb8ea0ad69b5d782d4e
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-        curl && \
+        curl \
+        && \
     rm -rf /var/lib/apt/lists/*
 
 RUN useradd x -m && \
