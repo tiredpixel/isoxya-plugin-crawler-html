@@ -38,7 +38,7 @@ cd misc/streams/stable/
 Boot the stack:
 
 ```sh
-docker-compose up
+docker compose up
 ```
 
 
