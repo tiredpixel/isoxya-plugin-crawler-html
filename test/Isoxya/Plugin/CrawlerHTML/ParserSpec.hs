@@ -100,6 +100,6 @@ load :: (MonadFail m, MonadIO m) => Text -> Integer -> ProcessorIHeader ->
 load url status header = do
     i <- genProcessorI url status header
     let linksA = parse i
-    t <- readFileText $ fixtureLink url
-    let Just linksE = decode $ encodeUtf8 t
+    t <- readFileLBS $ fixtureLink url
+    let Just linksE = decode t
     return (linksA, linksE)
